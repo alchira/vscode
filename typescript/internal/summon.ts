@@ -33,7 +33,7 @@ export class SUMMON {
         const attachables = ref.local.attachables;
         if (attachables[fragment]?.summon) {
             await editor.edit(editBuilder => {
-                editBuilder.insert(tagRange.range.end, '\n' + attachables[fragment].summon);
+                editBuilder.insert(tagRange.range.end, '\n' + (attachables[fragment].summon || ""));
             }, { undoStopBefore: true, undoStopAfter: true });
         }
     };

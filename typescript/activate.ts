@@ -119,7 +119,7 @@ export class ExtensionManager {
         this.W_CSSREFERENCE = new CSSREFERENCE(this);
         this.W_INTELLISENSE = new INTELLISENSE(this);
 
-        const autoRefresh = setInterval(() => { this.RequestManifest(); }, 250);
+        const autoRefresh = setInterval(() => { this.RequestManifest(); }, 400);
 
         this.Context.subscriptions.push(
             { dispose() { autoRefresh.close(); } },
@@ -152,13 +152,6 @@ export class ExtensionManager {
             vscode.commands.registerCommand(`${this.ID}.server.restart`, this.respawn),
             vscode.commands.registerCommand(`${this.ID}.server.send`, this.W_BRIDGE.interactive),
 
-            vscode.window.onDidChangeWindowState(() => { this.RefreshEditors(); }),
-            vscode.window.tabGroups.onDidChangeTabs(() => { this.RefreshEditors(); }),
-            vscode.window.onDidChangeActiveTextEditor(() => { this.RefreshEditors(); }),
-            vscode.window.onDidChangeVisibleTextEditors(() => { this.RefreshEditors(); }),
-            vscode.window.onDidChangeTextEditorSelection(() => { this.RefreshEditors(); }),
-            vscode.window.onDidChangeTextEditorViewColumn(() => { this.RefreshEditors(); }),
-
             vscode.workspace.onDidOpenTextDocument(() => { this.RequestManifest(); }),
             vscode.workspace.onDidCloseTextDocument(() => { this.RequestManifest(); }),
             vscode.workspace.onDidChangeTextDocument(() => { this.RequestManifest(); }),
@@ -184,7 +177,8 @@ export class ExtensionManager {
             this.spawn();
             this.W_BRIDGE.WSStream("manifest-mixed", params);
         } finally {
-            const interval = Math.max(this.config.get<number>("request.interval", 100), 100);
+            const min = 200;
+            const interval = Math.max(this.config.get<number>("request.interval", min), min);
             setTimeout(() => {
                 this.AwaitRequest = false;
             }, interval);

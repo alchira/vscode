@@ -116,14 +116,6 @@
           "type": "string",
           "default": "#f7b787",
           "description": "Color for tag value. Restart extension to take effect."
-        },
-        "xcss.providers.palette": {
-          "type": "boolean",
-          "default": false,
-          "description": "Color provider scope. (Compose Only: false, Scope Global: true)",
-          "tags": [
-            "experimental"
-          ]
         }
       }
     },

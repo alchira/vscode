@@ -1,6 +1,5 @@
 import vscode from 'vscode';
 import colorSense from '../helpers/color-sense';
-import fileScanner from '../helpers/script-ranges';
 
 import { SwitchRGB } from "../helpers/color-swap";
 import { ExtensionManager } from '../activate';
@@ -87,15 +86,11 @@ export class PALETTE {
     provideDocumentColors(document: vscode.TextDocument): vscode.ColorInformation[] {
         if (!document) { return []; };
         const colors: vscode.ColorInformation[] = [];
-
-        if (this.Server.config.get<boolean>("providers.palette")) {
-            colors.push(...this.readColorData(document.getText(), 0, new vscode.Position(0, 0)));
-        } else {
-            for (const range of fileScanner(document.getText()).TagRanges) {
-                for (const r of range.cache.composerRanges) {
-                    if (!r.val) { continue; }
-                    colors.push(...this.readColorData(r.val, 0, r.valRange.start));
-                }
+        
+        for (const range of this.Server.ReferDocument(document).local.tagranges) {
+            for (const r of range.cache.composerRanges) {
+                if (!r.val) { continue; }
+                colors.push(...this.readColorData(r.val, 0, r.valRange.start));
             }
         }
 

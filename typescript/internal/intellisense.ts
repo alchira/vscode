@@ -17,7 +17,7 @@ export class INTELLISENSE {
 
     constructor(core: ExtensionManager) {
         this.Server = core;
-        this.triggers = ['\\', '!', '@', ' ', '=', '#', '~', '&', '\t', '\n', '/', '_', '(', ')', ':', '{', '}', '$'];
+        this.triggers = ['\\', '+', '@', ' ', '=', '#', '~', '&', '\t', '\n', '/', '_', '(', ')', ':', '{', '}', '$'];
 
         const smartMode = this.Server.config.get<boolean>("intellisense.mode");
         if (!smartMode) { // Omit trigger Characters
@@ -229,7 +229,7 @@ export class INTELLISENSE {
                             completions.push(...this.handleAttributeMatch(parsed.cursorString, attributeMap));
                         }
                     } else {
-                        completions.push(...this.escapeMatch(fileFragment, ref.local));
+                        completions.push(...this.escapeMatch(fileFragment, ref.local, false));
                     }
                 }
             }
@@ -530,30 +530,33 @@ export class INTELLISENSE {
                     break;
             }
         } else if (local.watchingAttributes.includes(attributeMatch)) {
-            const valuePrefix = valueMatch.match(/[=~!][\w/$_-]*$/i)?.[0] || '';
+            const valuePrefix = valueMatch.match(/[=~+&][\w/$_-]*$/i)?.[0] || '';
             const isAtStyle = this.testAtrule(valuePrefix || '');
-            if (valuePrefix[0] === "=" || valuePrefix[0] === "~" || valuePrefix[0] === "!") {
+            if (valuePrefix[0] === "=" || valuePrefix[0] === "~" || valuePrefix[0] === "+" || valuePrefix[0] === "&") {
                 const iconKind = isAtStyle ? vscode.CompletionItemKind.Variable : vscode.CompletionItemKind.Field;
                 completions.push(...this.AttachableFilter(valuePrefix.slice(1), iconKind, local));
             }
         } else {
-            completions.push(...this.escapeMatch(valueMatch, local));
+            completions.push(...this.escapeMatch(valueMatch, local, true));
         }
         return completions;
     }
 
-    escapeMatch(valueMatch: string, local: FILELOCAL): vscode.CompletionItem[] {
+    escapeMatch(valueMatch: string, local: FILELOCAL, includeAppend: boolean): vscode.CompletionItem[] {
         const completions: vscode.CompletionItem[] = [];
-        const valuePrefix = valueMatch.match(/\\[#=~!][\w/$_-]*$/i)?.[0] || '';
+        const valuePrefix = valueMatch.match(/\\[#=~+][\w/$_-]*$/i)?.[0] || '';
         const isAtStyle = this.testAtrule(valuePrefix || '');
-        if (valuePrefix[1] === "=" || valuePrefix[1] === "~" || valuePrefix[1] === "!") {
+        if (valuePrefix[1] === "~" 
+            || valuePrefix[1] === "+" 
+            || valuePrefix[1] === "=" 
+            || (includeAppend && valuePrefix[1] === "&")) {
             const iconKind = isAtStyle ? vscode.CompletionItemKind.Variable : vscode.CompletionItemKind.Field;
             completions.push(...this.AttachableFilter(valuePrefix.slice(2), iconKind, local));
         } else if (valuePrefix[1] == "#") {
             for (const hash of local.manifest.hashes) {
                 completions.push(this.createCompletionItem(
                     hash, hash, vscode.CompletionItemKind.Field,
-                    "Registered Local Hash",
+                    "Local Hash Follower",
                 ));
             }
         }

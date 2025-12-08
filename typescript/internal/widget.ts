@@ -39,9 +39,6 @@ export class WIDGET {
         });
 
         this.Server.Context.subscriptions.push(
-            vscode.window.onDidChangeActiveTextEditor(() => { this.refresh(); }),
-            vscode.workspace.onDidChangeWorkspaceFolders(() => { this.refresh(); }),
-            vscode.workspace.onDidOpenTextDocument(() => { this.refresh(); }),
             vscode.commands.registerCommand(this.statusBar.command, async () => {
                 const picked = await vscode.window.showQuickPick(this.options.map((o) => `${o.label}`), {
                     placeHolder: this.Server.IDCAP + ': Server Command Palette.'

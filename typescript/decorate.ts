@@ -118,6 +118,7 @@ export class DECORATIONS {
         const fileContentMap: t_FileContent[] = [];
         const editors = vscode.window.visibleTextEditors;
         for (const editor of editors) {
+
             const doc = this.Server.ReferDocument(editor.document);
 
             if (unusedLocalTracker[doc.relpath]) {
@@ -127,14 +128,12 @@ export class DECORATIONS {
             const local = doc.local;
             const cursorOffset = editor.document.offsetAt(editor.selection.active);
 
-            let localhashes: string[] = [];
-            let localhashrules: Record<string, string> = {};
-            let localsymclasses: Record<string, t_Metadata> = {};
-            if (this.Server.ReferDocument(editor.document)) {
-                localhashes = local.manifest.hashes;
-                localhashrules = this.Server.GetHashrules();
-                localsymclasses = local.attachables;
+            if (!doc.watching) {
+                continue;
             }
+            const localhashes = local.manifest.hashes;
+            const localhashrules = this.Server.GetHashrules();
+            const localsymclasses = local.attachables;
 
             const content = editor.document.getText();
             const watchAttr = doc.local.watchingAttributes;
@@ -159,16 +158,16 @@ export class DECORATIONS {
                     const val = track.val;
                     if (val.length > 2 && val[0] == "\\") {
                         const v1 = val[1];
-                        if (v1 == "~" || v1 == "=" || v1 == "!") {
+                        if (v1 == "~" || v1 == "=" || v1 == '+') {
                             const tr_val = val.slice(2);
                             if (localsymclasses[tr_val]) {
                                 symclass_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(tr_val) });
                             }
                         } else if (val[1] === "#" && localhashes.includes(val.slice(2))) {
-                            hash_Decos.push({ range: track.valRange, hoverMessage: "Registered Local Hash" });
+                            hash_Decos.push({ range: track.valRange, hoverMessage: "Local Hash Follower" });
                         }
                     } else if (val[0] === "#" && val[1] === "\\" && val[2] === "#" && localhashes.includes(val.slice(3))) {
-                        hash_Decos.push({ range: track.valRange, hoverMessage: "Registered Local Hash" });
+                        hash_Decos.push({ range: track.valRange, hoverMessage: "Local Hash Follower" });
                     }
                 } catch (error) {
                     console.error('Error processing Ranges:', error);
@@ -215,13 +214,13 @@ export class DECORATIONS {
                     try {
                         if (track.attrRange && track.valRange) {
                             for (const frag of (track.fragments ?? [])) {
-                                if (frag[0] != "~" && frag[0] != "=" && frag[0] != "!") { continue; }
+                                if (frag[0] != "~" && frag[0] != "=" && frag[0] != '&' && frag[0] != '+') { continue; }
                                 const metadata = localsymclasses[frag.slice(1)];
                                 if (metadata) {
                                     switch (frag[0]) {
                                         case '~': tildas.push(metadata); break;
+                                        case '+': follow.push(metadata); break;
                                         case '=': equals.push(metadata); break;
-                                        case '!': follow.push(metadata); break;
                                     }
                                     Object.assign(tagRange.variables, metadata.variables);
                                 }
@@ -238,7 +237,7 @@ export class DECORATIONS {
                 // Snippets with in watching attributes
                 for (const track of tagRange.cache.watcherValFrags) {
                     try {
-                        if (track.val[0] != "~" && track.val[0] != "=" && track.val[0] != "!") { continue; }
+                        if (track.val[0] != "~" && track.val[0] != "=" && track.val[0] != '&' && track.val[0] != '+') { continue; }
                         const tr_val = track.val.slice(1);
                         if (localsymclasses[tr_val]) {
                             symclass_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(tr_val) });
@@ -254,7 +253,7 @@ export class DECORATIONS {
                         const val = track.val;
                         if (val.length > 2 && val[0] == "\\") {
                             const v1 = val[1];
-                            if (v1 == "~" || v1 == "=" || v1 == "!") {
+                            if (v1 == "~" || v1 == "=" || v1 == '&' || v1 == '+') {
                                 const tr_val = val.slice(2);
                                 if (localsymclasses[tr_val]) {
                                     symclass_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(tr_val) });
@@ -263,16 +262,16 @@ export class DECORATIONS {
                                 if (metadata) {
                                     switch (v1) {
                                         case '~': tildas.push(metadata); break;
+                                        case '+': follow.push(metadata); break;
                                         case '=': equals.push(metadata); break;
-                                        case '!': follow.push(metadata); break;
                                     }
                                     Object.assign(tagRange.variables, metadata.variables);
                                 }
                             } else if (val[1] === "#" && localhashes.includes(val.slice(2))) {
-                                hash_Decos.push({ range: track.valRange, hoverMessage: "Registered Local Hash" });
+                                hash_Decos.push({ range: track.valRange, hoverMessage: "Local Hash Follower" });
                             }
                         } else if (val[0] === "#" && val[1] === "\\" && val[2] === "#" && localhashes.includes(val.slice(3))) {
-                            hash_Decos.push({ range: track.valRange, hoverMessage: "Registered Local Hash" });
+                            hash_Decos.push({ range: track.valRange, hoverMessage: "Local Hash Follower" });
                         }
                     } catch (error) {
                         console.error('Error processing Ranges:', error);
@@ -301,7 +300,7 @@ export class DECORATIONS {
                             (val[0] === "\\" && val[1] === "#" && localhashes.includes(val.slice(2))) ||
                             (val[0] === "#" && val[1] === "\\" && val[2] === "#" && localhashes.includes(val.slice(3)))
                         ) {
-                            hash_Decos.push({ range: track.valRange, hoverMessage: "Registered Local Hash" });
+                            hash_Decos.push({ range: track.valRange, hoverMessage: "Local Hash Follower" });
                         }
                     } catch (error) {
                         console.error('Error processing Ranges:', error);

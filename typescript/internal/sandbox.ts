@@ -22,7 +22,7 @@ export class SANDBOX {
             const ref = this.Server.ReferDocument(editor.document);
             const wordRange = doc.getWordRangeAtPosition(editor.selection.active, this.Server.SymClassRgx);
             const wordString = doc.getText(wordRange);
-            const cursorword = wordString.startsWith("-$") ? wordString.replace("-$", "$") : wordString;
+            const cursorword = wordString.replace("-$", "$").replace("_$", "$");
             this.symclass = cursorword;
             this.filepath = ref.relpath;
         }

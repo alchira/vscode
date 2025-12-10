@@ -158,7 +158,7 @@ export class DECORATIONS {
                     const val = track.val;
                     if (val.length > 2 && val[0] == "\\") {
                         const v1 = val[1];
-                        if (v1 == "~" || v1 == "=" || v1 == '+') {
+                        if (v1 == "~" || v1 == '+' || v1 == "=") {
                             const tr_val = val.slice(2);
                             if (localsymclasses[tr_val]) {
                                 symclass_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(tr_val) });
@@ -219,6 +219,7 @@ export class DECORATIONS {
                                 if (metadata) {
                                     switch (frag[0]) {
                                         case '~': tildas.push(metadata); break;
+                                        case '&': tildas.push(metadata); break;
                                         case '+': follow.push(metadata); break;
                                         case '=': equals.push(metadata); break;
                                     }
@@ -261,6 +262,7 @@ export class DECORATIONS {
                                 const metadata = localsymclasses[tr_val];
                                 if (metadata) {
                                     switch (v1) {
+                                        case '&': tildas.push(metadata); break;
                                         case '~': tildas.push(metadata); break;
                                         case '+': follow.push(metadata); break;
                                         case '=': equals.push(metadata); break;

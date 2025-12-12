@@ -113,6 +113,7 @@ export class BRIDGE {
         }
     };
 
+    gap = 5000;
     restartAwait = false;
     async start(spawnPath: string, args: string[], overide_config = false) {
         const binpath = this.FindBinpath();
@@ -120,7 +121,7 @@ export class BRIDGE {
         if (this.restartAwait) { return; }
 
         this.restartAwait = true;
-        setTimeout(() => { this.restartAwait = false; }, 1000);
+        setTimeout(() => { this.restartAwait = false; }, this.gap);
 
         if (!(this.Server.config.get<boolean>("server.autostart") || overide_config)) { return; }
 
@@ -133,7 +134,7 @@ export class BRIDGE {
             stdio: ['pipe', 'pipe', 'pipe'],
             env: process.env,
         });
-        setTimeout(this.unpause, 1000);
+        setTimeout(this.unpause, this.gap);
 
         if (this.Process.stdout) {
             this.Process.stdout.on('data', (buffer: Buffer) => {

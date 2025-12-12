@@ -81,6 +81,7 @@ export interface t_Metadata {
     declarations?: string[],
     summon?: string,
     markdown?: string
+    appendable?: boolean
 }
 
 export interface t_JsonRPCRequest {

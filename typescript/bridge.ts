@@ -80,7 +80,7 @@ export class BRIDGE {
             const binPathFile = path.join(this.Server.WorkspaceUri.fsPath, 'node_modules', Metadata.PackageName, 'BINPATH');
             if (existsSync(binPathFile)) { binpathlist.push(fs.readFileSync(binPathFile, { encoding: 'utf-8' })); }
 
-            binpathlist.push(ReadCmdReturn('xcss', 'binpath'));
+            binpathlist.push(ReadCmdReturn('xtatix', 'binpath'));
         }
 
         binpathlist.push(Metadata.binPath);

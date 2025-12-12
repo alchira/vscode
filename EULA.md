@@ -2,9 +2,9 @@
 
 ## 1. Introduction
 
-This End User License Agreement ("EULA") governs your use of the XCSS VSCode Extension ("Extension"), provided under the MIT License. By installing or using the Extension, you agree to comply with all terms outlined in this agreement.
+This End User License Agreement ("EULA") governs your use of the Xtatix VSCode Extension ("Extension"), provided under the MIT License. By installing or using the Extension, you agree to comply with all terms outlined in this agreement.
 
-## 2. License for XCSS VSCode Extension
+## 2. License for Xtatix VSCode Extension
 
 The Extension itself, including all associated source code and assets outside the embedded ./package folder, is licensed under the MIT License. This permits free use, modification, distribution, and private or commercial use under the terms of the MIT License.
 
@@ -30,4 +30,4 @@ In no event shall the authors or copyright holders be liable for any damages ari
 
 ## 6. Acceptance
 
-By using the XCSS VSCode Extension, you acknowledge that you have read, understood, and agreed to the terms of this Agreement including the special provisions pertaining to the embedded ./package folder.
+By using the Xtatix VSCode Extension, you acknowledge that you have read, understood, and agreed to the terms of this Agreement including the special provisions pertaining to the embedded ./package folder.

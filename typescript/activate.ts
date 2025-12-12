@@ -24,7 +24,7 @@ import { FOLDRANGE } from './internal/fold-range';
 import { SUMMON } from './internal/summon';
 import { FILELOCAL } from './file-local';
 
-const ID = "xcss";
+const ID = "xtatix";
 const PORT = 1248;
 
 export class ExtensionManager {

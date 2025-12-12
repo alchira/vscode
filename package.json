@@ -1,22 +1,22 @@
 {
-  "name": "xcss-client",
-  "displayName": "XCSS Client",
-  "description": "Extension bundle for XCSS",
+  "name": "xtatix-client",
+  "displayName": "Xtatix Client",
+  "description": "Extension bundle for Xtatix",
   "version": "0.0.7",
   "publisher": "yshelldev",
   "author": {
     "name": "Vyshnav Prasad",
     "email": "official@yshell.dev"
   },
-  "homepage": "https://www.xcss.io/",
+  "homepage": "https://www.xtatix.io/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yshelldev/xcss-vscode"
+    "url": "https://github.com/yshelldev/xtatix-vscode"
   },
   "bugs": {
-    "url": "https://github.com/yshelldev/xcss-vscode/issues"
+    "url": "https://github.com/yshelldev/xtatix-vscode/issues"
   },
-  "contributing": "https://github.com/yshelldev/xcss-vscode/blob/main/CONTRIBUTING.md",
+  "contributing": "https://github.com/yshelldev/xtatix-vscode/blob/main/CONTRIBUTING.md",
   "scripts": {
     "lint": "eslint ./typescript --ext .ts",
     "init": "npm install -g typescript @vscode/vsce ovsx && node central/execute/index.js && npm install",
@@ -59,7 +59,7 @@
   ],
   "keywords": [
     "css",
-    "xcss",
+    "xtatix",
     "toolkit",
     "stylesheet",
     "intellisense",
@@ -75,44 +75,44 @@
   ],
   "contributes": {
     "configuration": {
-      "title": "xcss",
+      "title": "xtatix",
       "properties": {
-        "xcss.request.interval": {
+        "xtatix.request.interval": {
           "type": "number",
           "default": 400,
           "description": "Increase Request Interval in Case of Performance issues, (min 200)."
         },
-        "xcss.decoration.attribute": {
+        "xtatix.decoration.attribute": {
           "type": "string",
           "default": "#f57970",
           "description": "Color for tag attribute. Restart extension to take effect."
         },
-        "xcss.intellisense.mode": {
+        "xtatix.intellisense.mode": {
           "type": "boolean",
           "default": true,
           "description": "Symclass suggestions can smart(true) or simple(false)"
         },
-        "xcss.server.autostart": {
+        "xtatix.server.autostart": {
           "type": "boolean",
           "default": true,
           "description": "Incase of server faliure, auto-start another instance."
         },
-        "xcss.server.staticport": {
+        "xtatix.server.staticport": {
           "type": "boolean",
           "default": true,
           "description": "Use a fixed static port for sandbox WebSocket; disable if static cache issues occur (requires restart)."
         },
-        "xcss.decoration.comment": {
+        "xtatix.decoration.comment": {
           "type": "string",
           "default": "#ffbe88bb",
           "description": "Color for attribute comment value. Restart extension to take effect."
         },
-        "xcss.decoration.property": {
+        "xtatix.decoration.property": {
           "type": "string",
           "default": "#ffe1a1",
           "description": "Color for css properties in tag value. Restart extension to take effect."
         },
-        "xcss.decoration.value": {
+        "xtatix.decoration.value": {
           "type": "string",
           "default": "#f7b787",
           "description": "Color for tag value. Restart extension to take effect."
@@ -123,74 +123,74 @@
       {
         "id": "markdown",
         "aliases": [
-          "XCSS"
+          "Xtatix"
         ],
         "extensions": [
-          ".xcss"
+          ".xtatix"
         ]
       }
     ],
     "commands": [
       {
-        "command": "xcss.editor.summon",
+        "command": "xtatix.editor.summon",
         "title": "Summon Structure after Tag",
-        "category": "XCSS Editor"
+        "category": "Xtatix Editor"
       },
       {
-        "command": "xcss.editor.format",
-        "title": "Format XCSS Attribute Blocks in Active Editor",
-        "category": "XCSS Editor"
+        "command": "xtatix.editor.format",
+        "title": "Format Xtatix Attribute Blocks in Active Editor",
+        "category": "Xtatix Editor"
       },
       {
-        "command": "xcss.action.compview",
+        "command": "xtatix.action.compview",
         "title": "Toggle Preview of Symclass",
-        "category": "XCSS Action"
+        "category": "Xtatix Action"
       },
       {
-        "command": "xcss.action.toggle",
+        "command": "xtatix.action.toggle",
         "title": "Toggle b/w Source and Target Files",
-        "category": "XCSS Action"
+        "category": "Xtatix Action"
       },
       {
-        "command": "xcss.action.command",
+        "command": "xtatix.action.command",
         "title": "Core Commands on Terminal.",
-        "category": "XCSS Action"
+        "category": "Xtatix Action"
       },
       {
-        "command": "xcss.server.pause",
+        "command": "xtatix.server.pause",
         "title": "Pause Activity",
-        "category": "XCSS Server"
+        "category": "Xtatix Server"
       },
       {
-        "command": "xcss.server.restart",
+        "command": "xtatix.server.restart",
         "title": "Restart",
-        "category": "XCSS Server"
+        "category": "Xtatix Server"
       },
       {
-        "command": "xcss.server.send",
+        "command": "xtatix.server.send",
         "title": "Interactive",
-        "category": "XCSS Server"
+        "category": "Xtatix Server"
       }
     ],
     "keybindings": [
       {
         "key": "alt+x",
-        "command": "xcss.editor.summon",
+        "command": "xtatix.editor.summon",
         "when": "editorFocus"
       },
       {
         "key": "alt+shift+x",
-        "command": "xcss.editor.format",
+        "command": "xtatix.editor.format",
         "when": "editorFocus"
       },
       {
         "key": "alt+ctrl+x",
-        "command": "xcss.action.compview",
+        "command": "xtatix.action.compview",
         "when": "editorFocus"
       },
       {
         "key": "ctrl+alt+shift+x",
-        "command": "xcss.action.toggle",
+        "command": "xtatix.action.toggle",
         "when": "editorFocus"
       }
     ],

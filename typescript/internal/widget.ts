@@ -22,9 +22,9 @@ export class WIDGET {
             { type: "command", label: 'Debug', content: 'debug' },
             { type: "command", label: 'Preview', content: 'preview' },
             { type: "command", label: 'Init/Verify', content: 'init' },
-            { type: "redirect", label: 'Git Reposiory.', content: "https://github.com/yshelldev/xcss-pacakge" },
-            { type: "redirect", label: 'Spin My Flavour.', content: "https://github.com/yshelldev/xcss-scaffold." },
-            { type: "redirect", label: 'Get a walkthorugh..', content: "https://github.com/yshelldev/xcss-tutorial" },
+            { type: "redirect", label: 'Git Reposiory.', content: "https://github.com/yshelldev/xtatix-pacakge" },
+            { type: "redirect", label: 'Spin My Flavour.', content: "https://github.com/yshelldev/xcaffold." },
+            { type: "redirect", label: 'Get a walkthorugh..', content: "https://github.com/yshelldev/xtatix-tutorial" },
             { type: "redirect", label: 'Sponsor Our Project Today.', content: "https://github.com/sponsors/yshelldev/dashboard" },
         ];
         this.options.forEach((s, i) => {

@@ -1,3 +1,3 @@
-[submodule "xtatix"]
-	path = xtatix
+[submodule "package"]
+	path = package
 	url = https://github.com/xtatixone/xtatix.git

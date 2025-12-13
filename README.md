@@ -1,4 +1,4 @@
-# [Xtatix Extension for VS Code](https://marketplace.visualstudio.com/items?itemName=yshelldev.xtatix-client)
+# [Xtatix Extension for VS Code](https://marketplace.visualstudio.com/items?itemName=yshelldev.xtatix)
 
 Essential Xtatix developer tooling for VSCode, featuring integrated LSP, bundled binary, and focused support for Xtatix workflows.
 

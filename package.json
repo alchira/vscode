@@ -1,8 +1,8 @@
 {
-  "name": "xtatix-client",
-  "displayName": "Xtatix Client",
+  "name": "xtatix",
+  "displayName": "Xtatix",
   "description": "Extension bundle for Xtatix",
-  "version": "0.0.7",
+  "version": "0.0.0",
   "publisher": "yshelldev",
   "author": {
     "name": "Vyshnav Prasad",
@@ -11,12 +11,12 @@
   "homepage": "https://www.xtatix.io/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yshelldev/xtatix-vscode"
+    "url": "https://github.com/xtatixone/vscode"
   },
   "bugs": {
-    "url": "https://github.com/yshelldev/xtatix-vscode/issues"
+    "url": "https://github.com/xtatixone/vscode/issues"
   },
-  "contributing": "https://github.com/yshelldev/xtatix-vscode/blob/main/CONTRIBUTING.md",
+  "contributing": "https://github.com/xtatixone/vscode/blob/main/CONTRIBUTING.md",
   "scripts": {
     "lint": "eslint ./typescript --ext .ts",
     "init": "npm install -g typescript @vscode/vsce ovsx && node central/execute/index.js && npm install",

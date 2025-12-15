@@ -79,7 +79,7 @@ export interface t_Metadata {
     skeleton?: t_Skeleton,
     variables?: Record<string, string>,
     declarations?: string[],
-    summon?: string,
+    sketch?: string,
     markdown?: string
     appendable?: boolean
 }

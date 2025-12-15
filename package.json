@@ -1,5 +1,5 @@
 {
-  "name": "xtatix",
+  "name": "@xtatix/engine",
   "displayName": "Xtatix",
   "description": "Extension bundle for Xtatix",
   "version": "0.0.0",
@@ -126,14 +126,14 @@
           "Xtatix"
         ],
         "extensions": [
-          ".xtatix"
+          ".xtx"
         ]
       }
     ],
     "commands": [
       {
-        "command": "xtatix.editor.summon",
-        "title": "Summon Structure after Tag",
+        "command": "xtatix.editor.sketch",
+        "title": "Sketch Structure after Tag",
         "category": "Xtatix Editor"
       },
       {
@@ -175,7 +175,7 @@
     "keybindings": [
       {
         "key": "alt+x",
-        "command": "xtatix.editor.summon",
+        "command": "xtatix.editor.sketch",
         "when": "editorFocus"
       },
       {

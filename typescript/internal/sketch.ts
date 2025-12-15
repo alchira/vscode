@@ -2,7 +2,7 @@
 import vscode from 'vscode';
 import { ExtensionManager } from '../activate';
 
-export class SUMMON {
+export class SKETCH {
     private Server: ExtensionManager;
 
     constructor(core: ExtensionManager) {
@@ -15,7 +15,7 @@ export class SUMMON {
     // Folding Range Provider
 
 
-    SummonStructure = async () => {
+    SketchStructure = async () => {
         const editor = vscode.window.activeTextEditor;
         if (!editor) { return; }
         const ref = this.Server.ReferDocument(editor.document);
@@ -31,9 +31,9 @@ export class SUMMON {
         if (!tagRange) { return; }
 
         const attachables = ref.local.attachables;
-        if (attachables[fragment]?.summon) {
+        if (attachables[fragment]?.sketch) {
             await editor.edit(editBuilder => {
-                editBuilder.insert(tagRange.range.end, '\n' + (attachables[fragment].summon || ""));
+                editBuilder.insert(tagRange.range.end, '\n' + (attachables[fragment].sketch || ""));
             }, { undoStopBefore: true, undoStopAfter: true });
         }
     };

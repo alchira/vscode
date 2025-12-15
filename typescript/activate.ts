@@ -21,7 +21,7 @@ import { DECORATIONS } from './decorate';
 import { SANDBOX } from './internal/sandbox';
 import { FILETOGGLE } from './internal/file-toggle';
 import { FOLDRANGE } from './internal/fold-range';
-import { SUMMON } from './internal/summon';
+import { SKETCH } from './internal/sketch';
 import { FILELOCAL } from './file-local';
 
 const ID = "xtatix";
@@ -35,7 +35,7 @@ export class ExtensionManager {
     get config(): vscode.WorkspaceConfiguration { return vscode.workspace.getConfiguration(this.ID); };
 
     // External Workers
-    public W_SUMMON: SUMMON;
+    public W_SKETCH: SKETCH;
     public W_BRIDGE: BRIDGE;
     public W_WIDGET: WIDGET;
     public W_SANDBOX: SANDBOX;
@@ -105,7 +105,7 @@ export class ExtensionManager {
         this.reset();
         this.Context = context;
 
-        this.W_SUMMON = new SUMMON(this);
+        this.W_SKETCH = new SKETCH(this);
         this.W_BRIDGE = new BRIDGE(this);
         this.W_WIDGET = new WIDGET(this);
         this.W_PALETTE = new PALETTE(this);
@@ -124,7 +124,7 @@ export class ExtensionManager {
         this.Context.subscriptions.push(
             { dispose() { autoRefresh.close(); } },
 
-            this.W_SUMMON,
+            this.W_SKETCH,
             this.W_BRIDGE,
             this.W_WIDGET,
             this.W_PALETTE,
@@ -146,7 +146,7 @@ export class ExtensionManager {
             vscode.commands.registerCommand(`${this.ID}.action.toggle`, this.W_FILETOGGLE.CommandFileToggle),
             vscode.commands.registerCommand(`${this.ID}.editor.format`, this.W_FORMATTING.formatFile),
             vscode.commands.registerCommand(`${this.ID}.action.compview`, this.W_SANDBOX.Open),
-            vscode.commands.registerCommand(`${this.ID}.editor.summon`, this.W_SUMMON.SummonStructure),
+            vscode.commands.registerCommand(`${this.ID}.editor.sketch`, this.W_SKETCH.SketchStructure),
 
             vscode.commands.registerCommand(`${this.ID}.server.pause`, this.pause),
             vscode.commands.registerCommand(`${this.ID}.server.restart`, this.respawn),

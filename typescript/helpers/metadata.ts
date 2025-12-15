@@ -101,7 +101,7 @@ export function metamergeFormat(heading: string, declaration: string, objects: t
         info: [],
         skeleton: { "": {} },
         declarations: [declaration],
-        summon: '',
+        sketch: '',
         variables: {}
     };
 

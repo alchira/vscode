@@ -1,5 +1,5 @@
 {
-  "name": "@xtatix/engine",
+  "name": "vscode",
   "displayName": "Xtatix",
   "description": "Extension bundle for Xtatix",
   "version": "0.0.0",
@@ -41,7 +41,6 @@
   "licenseFile": "LICENSE",
   "type": "commonjs",
   "main": "./extension/activate.js",
-  "browser": "./extension/activate.js",
   "icon": "./logo.png",
   "galleryBanner": {
     "color": "#171b22",

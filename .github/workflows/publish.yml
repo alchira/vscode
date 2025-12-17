@@ -18,11 +18,6 @@ jobs:
         with:
           node-version: "22"
 
-      - run: git submodule update --init ./central
-      - run: |
-          cd central
-          git submodule update --init ./scaffold
-          cd ..
       - run: npm run package
       - name: Get version from package.json
         id: artifact

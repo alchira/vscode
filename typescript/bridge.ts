@@ -1,7 +1,7 @@
 import fs, { existsSync } from 'fs';
 import vscode from 'vscode';
 import { ExtensionManager } from './activate';
-import { GetMetadata } from '../package/execute';
+import { GetMetadata } from '../package/package';
 import { WebSocket } from 'ws';
 import { spawn, ChildProcessWithoutNullStreams } from 'child_process';
 import { t_JsonRPCResponse } from './types';
@@ -77,7 +77,7 @@ export class BRIDGE {
         const binpathlist: string[] = [];
 
         if (!Metadata.DevMode && this.Server.WorkspaceUri) {
-            const binPathFile = path.join(this.Server.WorkspaceUri.fsPath, 'node_modules', Metadata.PackageName, 'BINPATH');
+            const binPathFile = path.join(this.Server.WorkspaceUri.fsPath, 'node_modules', Metadata.Package, 'abspath.txt');
             if (existsSync(binPathFile)) { binpathlist.push(fs.readFileSync(binPathFile, { encoding: 'utf-8' })); }
 
             binpathlist.push(ReadCmdReturn('xtatix', 'binpath'));

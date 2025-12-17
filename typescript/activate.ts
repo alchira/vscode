@@ -193,13 +193,9 @@ export class ExtensionManager {
         const cursor = this.W_SANDBOX.RefreshCursor();
         return { ...cursor, filemap };
     };
-
-    UpdateGlobalManifest = (global: t_ManifestGlobal) => {
-        if (global) { this.Global = global; }
-    };
-
+    
     UpdateMixedManifest = (m: t_Manifest_Mixed) => {
-        this.UpdateGlobalManifest(m.global);
+        if (m.global) { this.Global = m.global; }
         this.W_SANDBOX.RefreshWebview();
         this.UpdateLocalsManifest(m.locals);
     };

@@ -1,7 +1,6 @@
+*.vsix
+
+binary
 coverage
 extension
 node_modules
-
-*.vsix
-BINPATH
-xcaffold

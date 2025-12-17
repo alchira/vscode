@@ -3,6 +3,7 @@
 .github/**
 .gitmodules/**
 .vscode/**
+
 coverage/**
 typescript/**
 
@@ -17,3 +18,5 @@ typescript/**
 **/tsconfig.json
 **/eslint.config.mjs
 **/tsconfig.build.json
+
+package/binary

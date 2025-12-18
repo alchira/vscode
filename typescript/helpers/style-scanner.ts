@@ -39,7 +39,7 @@ export default function analyzer(content: string): t_CursorSnippet {
                 property = "";
                 fragment = "";
                 xtype = t_SnippetType.property;
-            } else if (["~", "=", "@"].includes(ch)) {
+            } else if (["~", "=", "+", "@"].includes(ch)) {
                 fragment = ch;
                 if (xtype !== t_SnippetType.rule) {
                     switch (ch) {

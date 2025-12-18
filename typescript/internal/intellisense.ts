@@ -275,7 +275,7 @@ export class INTELLISENSE {
                 case t_SnippetType.rule: {
                     for (const item of ["--attach", "--assign", "--apply"]) {
                         completions.push(this.createCompletionItem(
-                            "@"+item,
+                            "@" + item,
                             item,
                             vscode.CompletionItemKind.Property,
                             `Custom AtRule: @${item}`));

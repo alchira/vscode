@@ -14,7 +14,7 @@ export enum t_SnippetType {
     pseudo,
     selector,
     rule,
-    assign,
+    apply,
     attach,
     constant,
     variable,

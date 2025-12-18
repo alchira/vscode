@@ -27,8 +27,9 @@ export class FILETOGGLE {
             let switchpath = activeDoc.relpath;
 
             for (const k of Object.keys(this.Server.Global.switchmap)) {
-                if (switchpath.startsWith(k)) {
-                    switchpath = switchpath.replace(k, this.Server.Global.switchmap[k]);
+                const rel = path.relative(k, switchpath);
+                if (!!rel && !rel.startsWith("..") && !path.isAbsolute(rel)) {
+                    switchpath = path.join(this.Server.Global.switchmap[k], rel);
                     break;
                 }
             }

@@ -44,7 +44,8 @@ export default function analyzer(content: string): t_CursorSnippet {
                 if (xtype !== t_SnippetType.rule) {
                     switch (ch) {
                         case "@": type = t_SnippetType.rule; break;
-                        case "=": type = t_SnippetType.assign; break;
+                        case "+": type = t_SnippetType.apply; break;
+                        case "=": type = t_SnippetType.attach; break;
                         case "~": type = t_SnippetType.attach; break;
                     }
                 }
@@ -53,12 +54,19 @@ export default function analyzer(content: string): t_CursorSnippet {
             } else {
                 if (xtype === t_SnippetType.property) {
                     switch (fragment) {
+                        case "+":
+                            xtype = t_SnippetType.apply;
+                            break;
+                        case "@--apply":
+                            xtype = type;
+                            type = t_SnippetType.apply;
+                            break;
                         case "=":
-                            xtype = t_SnippetType.assign;
+                            xtype = t_SnippetType.attach;
                             break;
                         case "@--assign":
                             xtype = type;
-                            type = t_SnippetType.assign;
+                            type = t_SnippetType.attach;
                             break;
                         case "~":
                             xtype = t_SnippetType.attach;

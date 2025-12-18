@@ -164,10 +164,10 @@ export class DECORATIONS {
                                 symclass_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(tr_val) });
                             }
                         } else if (val[1] === "#" && localhashes.includes(val.slice(2))) {
-                            hash_Decos.push({ range: track.valRange, hoverMessage: "Local Hash Follower" });
+                            hash_Decos.push({ range: track.valRange, hoverMessage: "Local Hash Loader" });
                         }
                     } else if (val[0] === "#" && val[1] === "\\" && val[2] === "#" && localhashes.includes(val.slice(3))) {
-                        hash_Decos.push({ range: track.valRange, hoverMessage: "Local Hash Follower" });
+                        hash_Decos.push({ range: track.valRange, hoverMessage: "Local Hash Loader" });
                     }
                 } catch (error) {
                     console.error('Error processing Ranges:', error);
@@ -270,10 +270,10 @@ export class DECORATIONS {
                                     Object.assign(tagRange.variables, metadata.variables);
                                 }
                             } else if (val[1] === "#" && localhashes.includes(val.slice(2))) {
-                                hash_Decos.push({ range: track.valRange, hoverMessage: "Local Hash Follower" });
+                                hash_Decos.push({ range: track.valRange, hoverMessage: "Local Hash Loader" });
                             }
                         } else if (val[0] === "#" && val[1] === "\\" && val[2] === "#" && localhashes.includes(val.slice(3))) {
-                            hash_Decos.push({ range: track.valRange, hoverMessage: "Local Hash Follower" });
+                            hash_Decos.push({ range: track.valRange, hoverMessage: "Local Hash Loader" });
                         }
                     } catch (error) {
                         console.error('Error processing Ranges:', error);
@@ -302,7 +302,7 @@ export class DECORATIONS {
                             (val[0] === "\\" && val[1] === "#" && localhashes.includes(val.slice(2))) ||
                             (val[0] === "#" && val[1] === "\\" && val[2] === "#" && localhashes.includes(val.slice(3)))
                         ) {
-                            hash_Decos.push({ range: track.valRange, hoverMessage: "Local Hash Follower" });
+                            hash_Decos.push({ range: track.valRange, hoverMessage: "Local Hash Loader" });
                         }
                     } catch (error) {
                         console.error('Error processing Ranges:', error);

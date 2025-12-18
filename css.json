@@ -8,8 +8,13 @@
             "status": "experimental"
         },
         {
+            "name": "@--apply",
+            "description": "Custom attach directive to create symbolic class dependancy.",
+            "status": "experimental"
+        },
+        {
             "name": "@--assign",
-            "description": "Custom assemble directive to compose using existing blocks.",
+            "description": "Additional Symclasses which should be applied with same style.",
             "status": "experimental"
         }
     ],

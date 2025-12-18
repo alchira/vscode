@@ -254,7 +254,7 @@ export class INTELLISENSE {
                     completions.push(...items);
                     break;
                 }
-                case t_SnippetType.assign: {
+                case t_SnippetType.apply: {
                     const items = cursorSnippet.fragment === undefined ? [] : this.AssignableFilter(cursorSnippet.fragment, iconKind, local);
                     completions.push(...items);
                     break;
@@ -273,12 +273,12 @@ export class INTELLISENSE {
                     break;
                 }
                 case t_SnippetType.rule: {
-                    for (const item of ["--attach", "--assign"]) {
+                    for (const item of ["--attach", "--assign", "--apply"]) {
                         completions.push(this.createCompletionItem(
-                            item,
+                            "@"+item,
                             item,
                             vscode.CompletionItemKind.Property,
-                            `Custom AtRule: ${item}`));
+                            `Custom AtRule: @${item}`));
                     }
                     break;
                 }
@@ -525,7 +525,7 @@ export class INTELLISENSE {
                     completions.push(...this.AttachableFilter(result.fragment, iconKind, local));
                     break;
 
-                case t_SnippetType.assign:
+                case t_SnippetType.apply:
                     completions.push(...this.AssignableFilter(result.fragment, iconKind, local));
                     break;
             }
@@ -546,9 +546,9 @@ export class INTELLISENSE {
         const completions: vscode.CompletionItem[] = [];
         const valuePrefix = valueMatch.match(/\\[#=~+][\w/$_-]*$/i)?.[0] || '';
         const isAtStyle = this.testAtrule(valuePrefix || '');
-        if (valuePrefix[1] === "~" 
-            || valuePrefix[1] === "+" 
-            || valuePrefix[1] === "=" 
+        if (valuePrefix[1] === "~"
+            || valuePrefix[1] === "+"
+            || valuePrefix[1] === "="
             || (includeAppend && valuePrefix[1] === "&")) {
             const iconKind = isAtStyle ? vscode.CompletionItemKind.Variable : vscode.CompletionItemKind.Field;
             completions.push(...this.AttachableFilter(valuePrefix.slice(2), iconKind, local));
@@ -556,7 +556,7 @@ export class INTELLISENSE {
             for (const hash of local.manifest.hashes) {
                 completions.push(this.createCompletionItem(
                     hash, hash, vscode.CompletionItemKind.Field,
-                    "Local Hash Follower",
+                    "Local Hash Loader",
                 ));
             }
         }

@@ -537,9 +537,9 @@ export class INTELLISENSE {
                     break;
             }
         } else if (local.watchingAttributes.includes(attributeMatch)) {
-            const valuePrefix = valueMatch.match(/[=~+&][\w/$_-]*$/i)?.[0] || '';
+            const valuePrefix = valueMatch.match(/[=~+][\w/$_-]*$/i)?.[0] || '';
             const isAtStyle = this.testAtrule(valuePrefix || '');
-            if (valuePrefix[0] === "=" || valuePrefix[0] === "~" || valuePrefix[0] === "+" || valuePrefix[0] === "&") {
+            if (valuePrefix[0] === "=" || valuePrefix[0] === "~" || valuePrefix[0] === "+") {
                 const iconKind = isAtStyle ? vscode.CompletionItemKind.Variable : vscode.CompletionItemKind.Field;
                 completions.push(...this.AttachableFilter(valuePrefix.slice(1), iconKind, local));
             }

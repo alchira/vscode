@@ -229,12 +229,11 @@ export class DECORATIONS {
                     try {
                         if (track.attrRange && track.valRange) {
                             for (const frag of (track.fragments ?? [])) {
-                                if (frag[0] != "~" && frag[0] != "=" && frag[0] != '&' && frag[0] != '+') { continue; }
+                                if (frag[0] != "~" && frag[0] != "=" && frag[0] != '+') { continue; }
                                 const metadata = localsymclasses[frag.slice(1)];
                                 if (metadata) {
                                     switch (frag[0]) {
                                         case '~': tildas.push(metadata); break;
-                                        case '&': tildas.push(metadata); break;
                                         case '+': follow.push(metadata); break;
                                         case '=': equals.push(metadata); break;
                                     }
@@ -265,7 +264,7 @@ export class DECORATIONS {
                 // Snippets with in watching attributes
                 for (const track of tagRange.cache.watcherValFrags) {
                     try {
-                        if (track.val[0] != "~" && track.val[0] != "=" && track.val[0] != '&' && track.val[0] != '+') { continue; }
+                        if (track.val[0] != "~" && track.val[0] != "=" && track.val[0] != '+') { continue; }
                         const tr_val = track.val.slice(1);
                         if (localsymclasses[tr_val]) {
                             symclass_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(tr_val) });
@@ -281,7 +280,7 @@ export class DECORATIONS {
                         const val = track.val;
                         if (val.length > 2 && val[0] == "\\") {
                             const v1 = val[1];
-                            if (v1 == "~" || v1 == "=" || v1 == '&' || v1 == '+') {
+                            if (v1 == "~" || v1 == "=" || v1 == '+') {
                                 const tr_val = val.slice(2);
                                 if (localsymclasses[tr_val]) {
                                     symclass_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(tr_val) });
@@ -289,7 +288,6 @@ export class DECORATIONS {
                                 const metadata = localsymclasses[tr_val];
                                 if (metadata) {
                                     switch (v1) {
-                                        case '&': tildas.push(metadata); break;
                                         case '~': tildas.push(metadata); break;
                                         case '+': follow.push(metadata); break;
                                         case '=': equals.push(metadata); break;

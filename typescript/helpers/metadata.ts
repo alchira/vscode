@@ -55,7 +55,7 @@ function objectTreeMd(obj: t_formatting): string[] {
 export function metadataFormat(selector: string, data: t_Metadata, subhead = ""): string {
     const lines: string[] = [(subhead.length ? `${subhead}: ` : ``) + `**\`${selector}\`**`, ''];
 
-    for (const item of data.info || []) { lines.push(`- ${item}`); }
+    for (const item of data.info || []) { lines.push(item[0] == "=" ? `- \`${item}\`` : `- ${item}`); }
     lines.push('\n- **Skeleton:**');
 
     if (data.skeleton) {

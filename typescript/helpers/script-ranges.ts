@@ -15,7 +15,7 @@ const bracePair: Record<string, string> = {
 const closeBraces = ["]", "}", ")"];
 const openBraces = ["[", "{", "(", "'", '"', "`"];
 const symclasDeclarationRegex = /^[\w-_]+\$+[\w-]+$/i;
-const fragRegex = /[\\#\w\d$_/:&=~+-]/i;
+const fragRegex = /[\\#\w\d$_/:=~+-]/i;
 
 interface ScannerStash {
     cursorString: string;
@@ -25,6 +25,7 @@ interface ScannerStash {
     outsideTagfrags: t_TrackRange[];
 }
 
+// function commentScanner() {}
 
 function hashruleScanner(
     content: string,

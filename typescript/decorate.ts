@@ -15,6 +15,7 @@ export class DECORATIONS {
     comProp_Style: vscode.TextEditorDecorationType | undefined;
     compVal_Style: vscode.TextEditorDecorationType | undefined;
     comment_Style: vscode.TextEditorDecorationType | undefined;
+    macro_Style: vscode.TextEditorDecorationType | undefined;
 
 
     constructor(core: ExtensionManager) {
@@ -78,11 +79,23 @@ export class DECORATIONS {
             color: c_comment,
             rangeBehavior: vscode.DecorationRangeBehavior.ClosedClosed,
             before: {
-                contentText: '/*',
+                contentText: '/',
                 color: 'gray',
             },
             after: {
-                contentText: '*/',
+                contentText: '/',
+                color: 'gray',
+            },
+        });
+        this.macro_Style = vscode.window.createTextEditorDecorationType({
+            color: c_value,
+            rangeBehavior: vscode.DecorationRangeBehavior.ClosedClosed,
+            before: {
+                contentText: '[',
+                color: 'gray',
+            },
+            after: {
+                contentText: ']',
                 color: 'gray',
             },
         });
@@ -144,6 +157,7 @@ export class DECORATIONS {
             // Apply decorations
 
             const cmt_Decos: vscode.DecorationOptions[] = [];
+            const macro_Decos: vscode.DecorationOptions[] = [];
             const hash_Decos: vscode.DecorationOptions[] = [];
             const value_Decos: vscode.DecorationOptions[] = [];
             const watch_Decos: vscode.DecorationOptions[] = [];
@@ -181,8 +195,13 @@ export class DECORATIONS {
                     try {
                         if (track.attrRange && track.valRange) {
                             attrs_Decos.push({ range: track.attrRange });
-                            cmt_Decos.push({ range: track.valRange });
+                            if (tagRange.cache.composerRanges.length === 0) {
+                                macro_Decos.push({ range: track.valRange });
+                            } else {
+                                cmt_Decos.push({ range: track.valRange });
+                            }
                         }
+
                     } catch (error) {
                         console.error('Error processing Ranges:', error);
                     }
@@ -327,6 +346,7 @@ export class DECORATIONS {
                 tagRange.metadatas = [...tagRange.metadatas, ...tildas, ...follow, ...equals];
             }
 
+            if (this.macro_Style) { editor.setDecorations(this.macro_Style, macro_Decos); }
             if (this.attrs_Style) { editor.setDecorations(this.attrs_Style, attrs_Decos); }
             if (this.watch_Style) { editor.setDecorations(this.watch_Style, watch_Decos); }
             if (this.value_Style) { editor.setDecorations(this.value_Style, value_Decos); }

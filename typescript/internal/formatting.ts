@@ -28,7 +28,7 @@ export class FORMATTING {
         if (!ref) { return; }
 
         const attrValPairs: t_TrackRange[] = [];
-        for (const i of ref.local.RangeFilter(false, false, true)) {
+        for (const i of ref.local.RangeFilter(false, true, true)) {
             if (!i.attrRange.intersection(i.valRange)) {
                 attrValPairs.push(i);
             }
@@ -48,7 +48,8 @@ export class FORMATTING {
                     const postValue = doc.getText(postRange);
                     const valIntent = `${preAtrribute.match(/^[\t\s]*/)}`;
                     const valBreak = `\n${valIntent}`;
-                    const valFormatted = formatBlock(track.val.slice(1, -1) || '', valBreak);
+                    const valFormatted = track.attr === "&" ? track.val.slice(1, -1) :
+                        formatBlock(track.val.slice(1, -1) || '', valBreak);
                     let collitions = 0;
                     for (const t of attrValPairs) {
                         if (postRange.intersection(t.blockRange)) { collitions++; }

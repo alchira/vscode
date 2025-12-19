@@ -91,11 +91,7 @@ export class DECORATIONS {
             color: c_value,
             rangeBehavior: vscode.DecorationRangeBehavior.ClosedClosed,
             before: {
-                contentText: '[',
-                color: 'gray',
-            },
-            after: {
-                contentText: ']',
+                contentText: '>',
                 color: 'gray',
             },
         });
@@ -157,8 +153,8 @@ export class DECORATIONS {
             // Apply decorations
 
             const cmt_Decos: vscode.DecorationOptions[] = [];
-            const macro_Decos: vscode.DecorationOptions[] = [];
             const hash_Decos: vscode.DecorationOptions[] = [];
+            const macro_Decos: vscode.DecorationOptions[] = [];
             const value_Decos: vscode.DecorationOptions[] = [];
             const watch_Decos: vscode.DecorationOptions[] = [];
             const attrs_Decos: vscode.DecorationOptions[] = [];
@@ -166,7 +162,7 @@ export class DECORATIONS {
             const comProp_Decos: vscode.DecorationOptions[] = [];
             const symclass_Decos: vscode.DecorationOptions[] = [];
 
-            // Snippets with in watching attributes
+            // Snippets outside tags
             for (const track of parsed.outsideTagfrags) {
                 try {
                     const val = track.val;
@@ -248,6 +244,18 @@ export class DECORATIONS {
                             const Metadatas: t_Metadata[] = [...tildas, ...follow, ...equals];
                             const MetadataMerged = metamergeFormat(track.attr, doc.relpath, Metadatas);
                             watch_Decos.push({ range: track.attrRange, hoverMessage: MetadataMerged.toolTip });
+                        }
+                    } catch (error) {
+                        console.error('Error processing Ranges:', error);
+                    }
+                }
+
+                // Comment Attributes
+                for (const track of tagRange.cache.commentValFrags) {
+                    try {
+                        const val = track.val;
+                        if (localsymclasses[val]) {
+                            symclass_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(val) });
                         }
                     } catch (error) {
                         console.error('Error processing Ranges:', error);

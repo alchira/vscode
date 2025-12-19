@@ -132,6 +132,7 @@ function fargScanner(
         }
 
         if (snippet.length === 0) {
+            snippet = "";
             start = marker;
             startPos = new vscode.Position(rowMarker, colMarker);
         }
@@ -156,6 +157,7 @@ function tagScanner(
 
     const tagCache: t_TagCache = {
         hashrules: [],
+        commentValFrags: [],
         commentsRanges: [],
         composerRanges: [],
         watchingRanges: [],
@@ -227,7 +229,8 @@ function tagScanner(
                 const blockRange = new vscode.Range(attrStartPos, valEndPos);
 
                 if (attr === "&") {
-                    tagCache.commentsRanges.push({ kind, attrRange, valRange, blockRange, valStart, valEnd, attrStart, attrEnd, attr, val, multiLine });
+                    const fragments = fargScanner(content, valStart, fileCursor.active.marker, valStartPos.line, valStartPos.character, tagCache.commentValFrags);
+                    tagCache.commentsRanges.push({ kind, attrRange, valRange, blockRange, valStart, valEnd, attrStart, attrEnd, attr, val, multiLine, fragments });
                 } else if (attr.endsWith("&") || symclasDeclarationRegex.test(attr)) {
                     hashruleScanner(content, attrStart, attrEnd + 1, attrStartPos.line, attrStartPos.character, tagCache);
                     const fragments = fargScanner(content, valStart, fileCursor.active.marker, valStartPos.line, valStartPos.character, tagCache.composeValFrags);

@@ -29,6 +29,7 @@ export interface t_CursorSnippet {
 
 export interface t_TagCache {
     hashrules: t_TrackRange[];
+    commentValFrags: t_TrackRange[];
     watchingRanges: t_TrackRange[];
     composerRanges: t_TrackRange[];
     commentsRanges: t_TrackRange[];

@@ -255,6 +255,8 @@ export class DECORATIONS {
                         const val = track.val;
                         if (localsymclasses[val]) {
                             symclass_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(val) });
+                        } else if (val[0] === "\\" && val[1] === "#" && localhashes.includes(val.slice(2))) {
+                            hash_Decos.push({ range: track.valRange, hoverMessage: "Local Hash Loader" });
                         }
                     } catch (error) {
                         console.error('Error processing Ranges:', error);

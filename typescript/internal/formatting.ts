@@ -56,7 +56,7 @@ export class FORMATTING {
                     }
 
                     const begin = /^[\t\s]*$/.test(preAtrribute) ? "" : valBreak;
-                    const end = (/^[\t\s]*$/.test(postValue) || !(collitions < 2)) ? "" : valBreak;
+                    const end = (/^[\t\s]*(\/?>)?$/.test(postValue) || !(collitions < 2)) ? "" : valBreak;
 
                     edits.push(vscode.TextEdit.replace(track.blockRange,
                         `${begin}${track.attr}=${track.val[0]}${valFormatted}${track.val[track.val.length - 1]}${end}`

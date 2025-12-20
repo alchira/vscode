@@ -91,7 +91,7 @@ export class DECORATIONS {
             color: c_value,
             rangeBehavior: vscode.DecorationRangeBehavior.ClosedClosed,
             before: {
-                contentText: '>',
+                contentText: '⎮>',
                 color: 'gray',
             },
         });

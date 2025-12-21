@@ -59,7 +59,8 @@ export function metadataFormat(selector: string, data: t_Metadata, subhead = "")
         switch (item[0]) {
             case "<": break;
             case ">": break;
-            case "=": lines.push(`- \`${item}\``); break
+            case "~": lines.push(`- \`${item}\``); break;
+            case "=": lines.push(`- \`${item}\``); break;
             default: lines.push(`- ${item}`);
         }
 

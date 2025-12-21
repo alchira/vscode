@@ -79,11 +79,11 @@ export class DECORATIONS {
             color: c_comment,
             rangeBehavior: vscode.DecorationRangeBehavior.ClosedClosed,
             before: {
-                contentText: '/',
+                contentText: '[',
                 color: 'gray',
             },
             after: {
-                contentText: '/',
+                contentText: ']',
                 color: 'gray',
             },
         });

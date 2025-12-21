@@ -197,6 +197,12 @@
       "customData": [
         "./css.json"
       ]
+    },
+    "html": {
+      "customData": [
+        "./xml.json"
+      ]
     }
+    
   }
 }

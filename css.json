@@ -14,7 +14,7 @@
         },
         {
             "name": "@--assign",
-            "description": "Additional Symclasses which should be applied with same style.",
+            "description": "Additional Symlinks which should be applied with same style.",
             "status": "experimental"
         }
     ],

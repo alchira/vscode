@@ -23,7 +23,7 @@ export class SKETCH {
 
         const selection = editor.selection;
         const wordRange = !selection.isEmpty ? selection
-            : editor.document.getWordRangeAtPosition(selection.active, this.Server.SymClassRgx);
+            : editor.document.getWordRangeAtPosition(selection.active, this.Server.SymlinkRgx);
         const fragment = editor.document.getText(wordRange);
 
         if (!wordRange) { return; }

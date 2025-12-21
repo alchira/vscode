@@ -89,7 +89,7 @@
         "xtatix.intellisense.mode": {
           "type": "boolean",
           "default": true,
-          "description": "Symclass suggestions can smart(true) or simple(false)"
+          "description": "Symlink suggestions can smart(true) or simple(false)"
         },
         "xtatix.server.autostart": {
           "type": "boolean",
@@ -142,7 +142,7 @@
       },
       {
         "command": "xtatix.action.compview",
-        "title": "Toggle Preview of Symclass",
+        "title": "Toggle Preview of Symlink",
         "category": "Xtatix Action"
       },
       {

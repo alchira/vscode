@@ -11,7 +11,7 @@ export class DECORATIONS {
     attrs_Style: vscode.TextEditorDecorationType | undefined;
     watch_Style: vscode.TextEditorDecorationType | undefined;
     hash_Style: vscode.TextEditorDecorationType | undefined;
-    symclass_Style: vscode.TextEditorDecorationType | undefined;
+    symlink_Style: vscode.TextEditorDecorationType | undefined;
     comProp_Style: vscode.TextEditorDecorationType | undefined;
     compVal_Style: vscode.TextEditorDecorationType | undefined;
     comment_Style: vscode.TextEditorDecorationType | undefined;
@@ -53,7 +53,7 @@ export class DECORATIONS {
             textDecoration: "underline",
             rangeBehavior: vscode.DecorationRangeBehavior.ClosedClosed
         });
-        this.symclass_Style = vscode.window.createTextEditorDecorationType({
+        this.symlink_Style = vscode.window.createTextEditorDecorationType({
             backgroundColor: "#77777733",
             borderRadius: "4px",
             rangeBehavior: vscode.DecorationRangeBehavior.ClosedClosed
@@ -91,7 +91,11 @@ export class DECORATIONS {
             color: c_value,
             rangeBehavior: vscode.DecorationRangeBehavior.ClosedClosed,
             before: {
-                contentText: '⎮>',
+                contentText: '[',
+                color: 'gray',
+            },
+            after: {
+                contentText: ']',
                 color: 'gray',
             },
         });
@@ -107,7 +111,7 @@ export class DECORATIONS {
             if (this.compVal_Style) { editor.setDecorations(this.compVal_Style, []); }
             if (this.comment_Style) { editor.setDecorations(this.comment_Style, []); }
             if (this.hash_Style) { editor.setDecorations(this.hash_Style, []); }
-            if (this.symclass_Style) { editor.setDecorations(this.symclass_Style, []); }
+            if (this.symlink_Style) { editor.setDecorations(this.symlink_Style, []); }
         };
 
         this.updateStyles();
@@ -142,7 +146,7 @@ export class DECORATIONS {
             }
             const localhashes = local.manifest.hashes;
             const localhashrules = this.Server.GetHashrules();
-            const localsymclasses = local.attachables;
+            const localsymlinks = local.attachables;
 
             const content = editor.document.getText();
             const watchAttr = doc.local.watchingAttributes;
@@ -160,7 +164,7 @@ export class DECORATIONS {
             const attrs_Decos: vscode.DecorationOptions[] = [];
             const compVal_Decos: vscode.DecorationOptions[] = [];
             const comProp_Decos: vscode.DecorationOptions[] = [];
-            const symclass_Decos: vscode.DecorationOptions[] = [];
+            const symlink_Decos: vscode.DecorationOptions[] = [];
 
             // Snippets outside tags
             for (const track of parsed.outsideTagfrags) {
@@ -170,8 +174,8 @@ export class DECORATIONS {
                         const v1 = val[1];
                         if (v1 == "~" || v1 == '+' || v1 == "=") {
                             const tr_val = val.slice(2);
-                            if (localsymclasses[tr_val]) {
-                                symclass_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(tr_val) });
+                            if (localsymlinks[tr_val]) {
+                                symlink_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(tr_val) });
                             }
                         } else if (val[1] === "#" && localhashes.includes(val.slice(2))) {
                             hash_Decos.push({ range: track.valRange, hoverMessage: "Local Hash Loader" });
@@ -207,7 +211,7 @@ export class DECORATIONS {
                     try {
                         if (track.attrRange && track.valRange) {
                             const f = track.attr.replace(/^[-_]\$/, "$");
-                            const metadata = localsymclasses[f];
+                            const metadata = localsymlinks[f];
                             if (metadata) {
                                 tagRange.metadatas.push(metadata);
                                 Object.assign(tagRange.variables, metadata.variables);
@@ -230,7 +234,7 @@ export class DECORATIONS {
                         if (track.attrRange && track.valRange) {
                             for (const frag of (track.fragments ?? [])) {
                                 if (frag[0] != "~" && frag[0] != "=" && frag[0] != '+') { continue; }
-                                const metadata = localsymclasses[frag.slice(1)];
+                                const metadata = localsymlinks[frag.slice(1)];
                                 if (metadata) {
                                     switch (frag[0]) {
                                         case '~': tildas.push(metadata); break;
@@ -253,8 +257,8 @@ export class DECORATIONS {
                 for (const track of tagRange.cache.commentValFrags) {
                     try {
                         const val = track.val;
-                        if (localsymclasses[val]) {
-                            symclass_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(val) });
+                        if (localsymlinks[val]) {
+                            symlink_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(val) });
                         } else if (val[0] === "\\" && val[1] === "#" && localhashes.includes(val.slice(2))) {
                             hash_Decos.push({ range: track.valRange, hoverMessage: "Local Hash Loader" });
                         }
@@ -268,8 +272,8 @@ export class DECORATIONS {
                     try {
                         if (track.val[0] != "~" && track.val[0] != "=" && track.val[0] != '+') { continue; }
                         const tr_val = track.val.slice(1);
-                        if (localsymclasses[tr_val]) {
-                            symclass_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(tr_val) });
+                        if (localsymlinks[tr_val]) {
+                            symlink_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(tr_val) });
                         }
                     } catch (error) {
                         console.error('Error processing Ranges:', error);
@@ -284,10 +288,10 @@ export class DECORATIONS {
                             const v1 = val[1];
                             if (v1 == "~" || v1 == "=" || v1 == '+') {
                                 const tr_val = val.slice(2);
-                                if (localsymclasses[tr_val]) {
-                                    symclass_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(tr_val) });
+                                if (localsymlinks[tr_val]) {
+                                    symlink_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(tr_val) });
                                 }
-                                const metadata = localsymclasses[tr_val];
+                                const metadata = localsymlinks[tr_val];
                                 if (metadata) {
                                     switch (v1) {
                                         case '~': tildas.push(metadata); break;
@@ -323,8 +327,8 @@ export class DECORATIONS {
                                     hoverMessage: found.description?.toString()
                                 });
                             }
-                        } else if (localsymclasses[val]) {
-                            symclass_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(val) });
+                        } else if (localsymlinks[val]) {
+                            symlink_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(val) });
                         } else if (
                             (val[0] === "\\" && val[1] === "#" && localhashes.includes(val.slice(2))) ||
                             (val[0] === "#" && val[1] === "\\" && val[2] === "#" && localhashes.includes(val.slice(3)))
@@ -362,7 +366,7 @@ export class DECORATIONS {
             if (this.compVal_Style) { editor.setDecorations(this.compVal_Style, compVal_Decos); }
             if (this.comment_Style) { editor.setDecorations(this.comment_Style, cmt_Decos); }
             if (this.hash_Style) { editor.setDecorations(this.hash_Style, hash_Decos); }
-            if (this.symclass_Style) { editor.setDecorations(this.symclass_Style, symclass_Decos); }
+            if (this.symlink_Style) { editor.setDecorations(this.symlink_Style, symlink_Decos); }
         }
 
         for (const filepath of Object.keys(unusedLocalTracker)) {

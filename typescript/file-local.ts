@@ -17,7 +17,7 @@ export class FILELOCAL {
             hashes: [],
             assignable: [],
             attachable: [],
-            symclasses: {},
+            symlinks: {},
         };
         this.updateManifest();
     }
@@ -42,20 +42,20 @@ export class FILELOCAL {
         return this.tagranges || [];
     }
 
-    getMetadata(symclass: string) {
-        return this.manifest.symclasses[symclass] || this.Server.Global.symclasses[symclass];
+    getMetadata(symlink: string) {
+        return this.manifest.symlinks[symlink] || this.Server.Global.symlinks[symlink];
     }
 
-    getMarkdown(symclass: string) {
-        let h = symclass + ":";
-        const metadata = this.getMetadata(symclass);
+    getMarkdown(symlink: string) {
+        let h = symlink + ":";
+        const metadata = this.getMetadata(symlink);
 
         if (!metadata) {
             return "";
         } else if (!metadata.markdown) {
             const mods: string[] = [];
-            if (this.manifest.assignable.includes(symclass)) { mods.push(" Assignable "); }
-            if (this.manifest.attachable.includes(symclass)) { mods.push(" Attachable "); }
+            if (this.manifest.assignable.includes(symlink)) { mods.push(" Assignable "); }
+            if (this.manifest.attachable.includes(symlink)) { mods.push(" Attachable "); }
             h += mods.join("&");
             metadata.markdown = metadataFormat(h, metadata);
         }
@@ -67,8 +67,8 @@ export class FILELOCAL {
     updateManifest(manifest: t_ManifestLocals = this.manifest) {
         this.manifest = manifest;
 
-        const l = this.manifest.symclasses;
-        const g = this.Server.Global.symclasses;
+        const l = this.manifest.symlinks;
+        const g = this.Server.Global.symlinks;
 
         const as: Record<string, t_Metadata> = {};
         const at: Record<string, t_Metadata> = {};
@@ -77,14 +77,14 @@ export class FILELOCAL {
         this.assignables = as;
         this.attachables = at;
 
-        for (const s of Object.keys(manifest.symclasses)) {
-            if (this.Server.Global.symclasses[s]) {
-                this.Server.Global.symclasses[s] = manifest.symclasses[s];
+        for (const s of Object.keys(manifest.symlinks)) {
+            if (this.Server.Global.symlinks[s]) {
+                this.Server.Global.symlinks[s] = manifest.symlinks[s];
             }
         }
     }
 
-    findSymclass(symclass: string) {
-        return this.Server.Global.symclasses[symclass] || this.manifest.symclasses?.[symclass];
+    findSymlink(symlink: string) {
+        return this.Server.Global.symlinks[symlink] || this.manifest.symlinks?.[symlink];
     }
 }

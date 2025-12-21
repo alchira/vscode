@@ -12,7 +12,7 @@ export class SANDBOX {
     }
 
     filepath = "";
-    symclass = "";
+    symlink = "";
     RefreshCursor = (force = false) => {
         const live = Boolean(this.States['live-preview-option-live-cursor']);
         const editor = vscode.window.activeTextEditor;
@@ -20,14 +20,14 @@ export class SANDBOX {
         if ((live || force) && editor) {
             const doc = editor.document;
             const ref = this.Server.ReferDocument(editor.document);
-            const wordRange = doc.getWordRangeAtPosition(editor.selection.active, this.Server.SymClassRgx);
+            const wordRange = doc.getWordRangeAtPosition(editor.selection.active, this.Server.SymlinkRgx);
             const wordString = doc.getText(wordRange);
             const cursorword = wordString.replace("-$", "$").replace("_$", "$");
-            this.symclass = cursorword;
+            this.symlink = cursorword;
             this.filepath = ref.relpath;
         }
 
-        return { filepath: this.filepath, symclass: this.symclass };
+        return { filepath: this.filepath, symlink: this.symlink };
     };
 
     RefereshFlagActive = true;

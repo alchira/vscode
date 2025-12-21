@@ -18,7 +18,7 @@ For details, please read the full EULA document provided in this repository.
 
 ### Template Import: `[ alt + x ]` 
 
-- Import available templates for the `symclass` at the active cursor position, appending them to the current HTML tag.
+- Import available templates for the `symlink` at the active cursor position, appending them to the current HTML tag.
 
 ### Content Formatting: `[ alt + shift + x ]` 
 
@@ -26,7 +26,7 @@ For details, please read the full EULA document provided in this repository.
 
 ### Component Sandbox: `[ ctrl + alt + x ]`
 
-- Open the component sandbox webview for the symclass at the cursor, next to the editor.
+- Open the component sandbox webview for the symlink at the cursor, next to the editor.
 
 ### Source/Target Switch: `[ ctrl + alt + shift + x ]`
 
@@ -46,7 +46,7 @@ For details, please read the full EULA document provided in this repository.
 - Tooltips with information.
 - Folding range support.
 - Attribute detection, decoration, and highlighting.
-- Go to definition for `symclasses`.
+- Go to definition for `symlinks`.
 - Color picker for formats: `rgb`, `rgba`, `hsl`, `hsla`, `lch`, `oklch`, `lab`, `oklab`, `hex`
 
 ## Language Support

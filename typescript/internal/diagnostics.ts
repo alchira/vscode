@@ -100,14 +100,14 @@ export class DIAGNOSTICS {
                             thisDiags.push(this.createWaring(i.attrRange, "Invalid Hashrule."));
                         }
                     }
-                    const symclasses: t_TrackRange[] = [];
+                    const symlinks: t_TrackRange[] = [];
                     for (const i of tag.cache.composerRanges) {
                         if (!i.attr.endsWith('&')) {
-                            symclasses.push(i);
+                            symlinks.push(i);
                         }
                     }
 
-                    for (const i of symclasses) {
+                    for (const i of symlinks) {
                         const declarations = attachables[i.attr]?.declarations;
                         if (declarations && declarations.length > 1) {
                             thisDiags.push(this.createWaring(i.attrRange, "Definitions in multiple locations."));
@@ -116,15 +116,15 @@ export class DIAGNOSTICS {
                             thisDiags.push(this.createWaring(i.attrRange, "Assignable cannot be reused for declaration."));
                         }
                         if (i.attr.includes("$---")) {
-                            thisDiags.push(this.createWaring(i.attrRange, "Symclass identifier shoundn't start with '---'."));
+                            thisDiags.push(this.createWaring(i.attrRange, "Symlink identifier shoundn't start with '---'."));
                         }
                     }
 
-                    if (symclasses.length === 0 && tag.cache.composerRanges.length) {
-                        thisDiags.push(this.createError(tag.range, "Symclass missing in declaration scope."));
-                    } else if (symclasses.length > 1) {
-                        for (const i of symclasses) {
-                            thisDiags.push(this.createWaring(i.attrRange, "Multiple Symclasses found in declaration scope."));
+                    if (symlinks.length === 0 && tag.cache.composerRanges.length) {
+                        thisDiags.push(this.createError(tag.range, "Symlink missing in declaration scope."));
+                    } else if (symlinks.length > 1) {
+                        for (const i of symlinks) {
+                            thisDiags.push(this.createWaring(i.attrRange, "Multiple Symlinks found in declaration scope."));
                         }
                     };
                 }

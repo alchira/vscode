@@ -22,16 +22,16 @@ export class DEFINITION {
         if (!this.Server.WorkspaceUri) { return; }
         const ref = this.Server.ReferDocument(document);
 
-        const range = document.getWordRangeAtPosition(position, this.Server.SymClassRgx);
+        const range = document.getWordRangeAtPosition(position, this.Server.SymlinkRgx);
         const word = document.getText(range);
         const isWordInTrackedRange = ref.local.RangeFilter().some(r => r.valRange.contains(position));
 
         if (!isWordInTrackedRange) { return undefined; }
-        const symclasses = ref.local.attachables;
+        const symlinks = ref.local.attachables;
         console.log(`Looking for definition of: ${word}`);
 
-        if (symclasses[word]?.declarations) {
-            const declaration = symclasses[word].declarations[0];
+        if (symlinks[word]?.declarations) {
+            const declaration = symlinks[word].declarations[0];
             if (typeof declaration !== "string") { return undefined; }
             const location = AnalyzeLocation(declaration);
             if (location === undefined) { return undefined; }

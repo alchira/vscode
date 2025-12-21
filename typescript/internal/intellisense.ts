@@ -7,7 +7,7 @@ import { generateAttributeMap, metadataFormat } from '../helpers/metadata';
 import { t_Metadata, t_CursorSnippet, t_SnippetType, t_TagRange } from '../types';
 import { FILELOCAL } from '../file-local';
 
-function symclassParse(s: string): string {
+function symlinkParse(s: string): string {
     return s.replace(/^[-_]*\$/, "$");
 }
 
@@ -61,7 +61,7 @@ export class INTELLISENSE {
         return completion;
     }
 
-    public SmartSymClassFilter(prefix: string, iconKind: vscode.CompletionItemKind, stashmap: Record<string, t_Metadata>) {
+    public SmartSymlinkFilter(prefix: string, iconKind: vscode.CompletionItemKind, stashmap: Record<string, t_Metadata>) {
 
         const stashKeys = Object.keys(stashmap);
         const slash_end = prefix.lastIndexOf('/');
@@ -171,7 +171,7 @@ export class INTELLISENSE {
         return completions;
     }
 
-    SimpleSymClassFilter(prefix: string, iconKind: vscode.CompletionItemKind, stashmap: Record<string, t_Metadata>): vscode.CompletionItem[] {
+    SimpleSymlinkFilter(prefix: string, iconKind: vscode.CompletionItemKind, stashmap: Record<string, t_Metadata>): vscode.CompletionItem[] {
         const completions: vscode.CompletionItem[] = [];
 
         for (const key of Object.keys(stashmap)) {
@@ -190,18 +190,18 @@ export class INTELLISENSE {
 
     public AttachableFilter(prefix: string, iconKind: vscode.CompletionItemKind, local: FILELOCAL): vscode.CompletionItem[] {
         if (this.Server.config.get<boolean>("intellisense.mode")) {
-            return this.SmartSymClassFilter(prefix, iconKind, local.attachables);
+            return this.SmartSymlinkFilter(prefix, iconKind, local.attachables);
         }
         if (prefix.length) { return []; }
-        return this.SimpleSymClassFilter(prefix, iconKind, local.attachables);
+        return this.SimpleSymlinkFilter(prefix, iconKind, local.attachables);
     }
 
     public AssignableFilter(prefix: string, iconKind: vscode.CompletionItemKind, local: FILELOCAL): vscode.CompletionItem[] {
         if (this.Server.config.get<boolean>("intellisense.mode")) {
-            return this.SmartSymClassFilter(prefix, iconKind, local.assignables);
+            return this.SmartSymlinkFilter(prefix, iconKind, local.assignables);
         }
         if (prefix.length) { return []; }
-        return this.SimpleSymClassFilter(prefix, iconKind, local.assignables);
+        return this.SimpleSymlinkFilter(prefix, iconKind, local.assignables);
     }
 
     provideCompletionItems(document: vscode.TextDocument, position: vscode.Position): vscode.CompletionItem[] | undefined {
@@ -385,7 +385,7 @@ export class INTELLISENSE {
                             item,
                             vscode.CompletionItemKind.Function,
                             `custom AtRule: ${item}`,
-                            "...symclasses"
+                            "...symlinks"
                         ));
                     }
 
@@ -423,8 +423,8 @@ export class INTELLISENSE {
 
                 case t_SnippetType.property:
                     {
-                        const symclass = local.attachables[symclassParse(attributeMatch)];
-                        const temp = { ...tagScopeVars, ...symclass?.variables || {} };
+                        const symlink = local.attachables[symlinkParse(attributeMatch)];
+                        const temp = { ...tagScopeVars, ...symlink?.variables || {} };
                         const keys = Object.keys(temp).sort();
                         for (const key of keys) {
                             const value = temp[key];
@@ -502,7 +502,7 @@ export class INTELLISENSE {
                         }
                     }
                     {
-                        const temp = { ...tagScopeVars, ...local.attachables[symclassParse(attributeMatch)]?.variables || {} };
+                        const temp = { ...tagScopeVars, ...local.attachables[symlinkParse(attributeMatch)]?.variables || {} };
                         const keys = Object.keys(temp).sort();
                         for (const key of keys) {
                             const value = temp[key];

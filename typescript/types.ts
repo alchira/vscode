@@ -107,7 +107,7 @@ export interface t_ManifestGlobal {
     switchmap: Record<string, string>,
     hashrules: Record<string, string>,
     constants: Record<string, string>,
-    symclasses: Record<string, t_Metadata>,
+    symlinks: Record<string, t_Metadata>,
     diagnostics: t_Diagnostic[],
 }
 
@@ -115,7 +115,7 @@ export interface t_ManifestLocals {
     hashes: string[],
     assignable: string[],
     attachable: string[],
-    symclasses: Record<string, t_Metadata>,
+    symlinks: Record<string, t_Metadata>,
 }
 
 export interface t_FileContent {
@@ -126,7 +126,7 @@ export interface t_FileContent {
 
 export interface r_Manifest_Mixed {
     filepath: string,
-    symclass: string,
+    symlink: string,
     filemap: t_FileContent,
 }
 

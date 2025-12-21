@@ -31,7 +31,7 @@ export class ExtensionManager {
     readonly ID = ID;
     readonly PORT = PORT;
     readonly IDCAP = this.ID.toLocaleUpperCase();
-    readonly SymClassRgx = /[\w/$_-]+/i;
+    readonly SymlinkRgx = /[\w/$_-]+/i;
     get config(): vscode.WorkspaceConfiguration { return vscode.workspace.getConfiguration(this.ID); };
 
     // External Workers
@@ -70,7 +70,7 @@ export class ExtensionManager {
             switchmap: {},
             hashrules: {},
             constants: {},
-            symclasses: {},
+            symlinks: {},
             diagnostics: [],
         };
 
@@ -193,7 +193,7 @@ export class ExtensionManager {
         const cursor = this.W_SANDBOX.RefreshCursor();
         return { ...cursor, filemap };
     };
-    
+
     UpdateMixedManifest = (m: t_Manifest_Mixed) => {
         if (m.global) { this.Global = m.global; }
         this.W_SANDBOX.RefreshWebview();

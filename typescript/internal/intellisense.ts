@@ -362,7 +362,7 @@ export class INTELLISENSE {
         const completions: vscode.CompletionItem[] = [];
 
         if (attributeMatch === "&") {
-            const valuePrefix = valueMatch.match(/\*[\w/$_-]*$/i)?.[0] || '';
+            const valuePrefix = valueMatch.match(/~[\w/$_-]*$/i)?.[0] || '';
             const isAtStyle = this.testAtrule(valuePrefix || '');
             if (valuePrefix.length > 0) {
                 const iconKind = isAtStyle ? vscode.CompletionItemKind.Variable : vscode.CompletionItemKind.Field;

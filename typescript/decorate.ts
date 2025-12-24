@@ -256,10 +256,10 @@ export class DECORATIONS {
                 // Comment Attributes
                 for (const track of tagRange.cache.commentValFrags) {
                     try {
-                        const val = track.val;
+                        const val = track.val.slice(1);
                         if (localsymlinks[val]) {
                             symlink_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(val) });
-                        } else if (val[0] === "\\" && val[1] === "#" && localhashes.includes(val.slice(2))) {
+                        } else if (track.val[0] === "\\" && track.val[1] === "#" && localhashes.includes(track.val.slice(2))) {
                             hash_Decos.push({ range: track.valRange, hoverMessage: "Local Hash Loader" });
                         }
                     } catch (error) {

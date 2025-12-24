@@ -131,7 +131,7 @@ function fargScanner(
             snippet = "";
         }
 
-        if (snippet.length === 0 || (content[marker + 1] === "\\" && content[marker + 2] === "#")) {
+        if (snippet.length === 0 || (content[marker + 1] === "\\" && content[marker + 2] === "#") || content[marker + 1] === "~") {
             snippet = "";
             start = marker;
             startPos = new vscode.Position(rowMarker, colMarker);

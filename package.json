@@ -1,22 +1,22 @@
 {
-  "name": "xtatix",
-  "displayName": "Xtatix",
-  "description": "Extension bundle for Xtatix",
+  "name": "alchira",
+  "displayName": "Alchira",
+  "description": "Extension bundle for Alchira",
   "version": "0.0.0",
   "publisher": "yshelldev",
   "author": {
     "name": "Vyshnav Prasad",
     "email": "official@yshell.dev"
   },
-  "homepage": "https://github.com/xtatixone",
+  "homepage": "https://github.com/alchira",
   "repository": {
     "type": "git",
-    "url": "https://github.com/xtatixone/vscode"
+    "url": "https://github.com/alchira/vscode"
   },
   "bugs": {
-    "url": "https://github.com/xtatixone/vscode/issues"
+    "url": "https://github.com/alchira/vscode/issues"
   },
-  "contributing": "https://github.com/xtatixone/vscode/blob/main/CONTRIBUTING.md",
+  "contributing": "https://github.com/alchira/vscode/blob/main/CONTRIBUTING.md",
   "scripts": {
     "lint": "eslint ./typescript --ext .ts",
     "init": "npm install -g typescript @vscode/vsce ovsx && npm install",
@@ -58,7 +58,7 @@
   ],
   "keywords": [
     "css",
-    "xtatix",
+    "alchira",
     "toolkit",
     "stylesheet",
     "intellisense",
@@ -74,44 +74,44 @@
   ],
   "contributes": {
     "configuration": {
-      "title": "xtatix",
+      "title": "alchira",
       "properties": {
-        "xtatix.request.interval": {
+        "alchira.request.interval": {
           "type": "number",
           "default": 400,
           "description": "Increase Request Interval in Case of Performance issues, (min 200)."
         },
-        "xtatix.decoration.attribute": {
+        "alchira.decoration.attribute": {
           "type": "string",
           "default": "#f57970",
           "description": "Color for tag attribute. Restart extension to take effect."
         },
-        "xtatix.intellisense.mode": {
+        "alchira.intellisense.mode": {
           "type": "boolean",
           "default": true,
           "description": "Symlink suggestions can smart(true) or simple(false)"
         },
-        "xtatix.server.autostart": {
+        "alchira.server.autostart": {
           "type": "boolean",
           "default": true,
           "description": "Incase of server faliure, auto-start another instance."
         },
-        "xtatix.server.staticport": {
+        "alchira.server.staticport": {
           "type": "boolean",
           "default": true,
           "description": "Use a fixed static port for sketchpad WebSocket; disable if static cache issues occur (requires restart)."
         },
-        "xtatix.decoration.comment": {
+        "alchira.decoration.comment": {
           "type": "string",
           "default": "#ffbe88bb",
           "description": "Color for attribute comment value. Restart extension to take effect."
         },
-        "xtatix.decoration.property": {
+        "alchira.decoration.property": {
           "type": "string",
           "default": "#ffe1a1",
           "description": "Color for css properties in tag value. Restart extension to take effect."
         },
-        "xtatix.decoration.value": {
+        "alchira.decoration.value": {
           "type": "string",
           "default": "#f7b787",
           "description": "Color for tag value. Restart extension to take effect."
@@ -122,74 +122,74 @@
       {
         "id": "markdown",
         "aliases": [
-          "Xtatix"
+          "Alchira"
         ],
         "extensions": [
-          ".xtx"
+          ".al"
         ]
       }
     ],
     "commands": [
       {
-        "command": "xtatix.editor.sketch",
+        "command": "alchira.editor.sketch",
         "title": "Sketch Structure after Tag",
-        "category": "Xtatix Editor"
+        "category": "Alchira Editor"
       },
       {
-        "command": "xtatix.editor.format",
-        "title": "Format Xtatix Attribute Blocks in Active Editor",
-        "category": "Xtatix Editor"
+        "command": "alchira.editor.format",
+        "title": "Format Alchira Attribute Blocks in Active Editor",
+        "category": "Alchira Editor"
       },
       {
-        "command": "xtatix.action.compview",
+        "command": "alchira.action.compview",
         "title": "Toggle Preview of Symlink",
-        "category": "Xtatix Action"
+        "category": "Alchira Action"
       },
       {
-        "command": "xtatix.action.toggle",
+        "command": "alchira.action.toggle",
         "title": "Toggle b/w Source and Target Files",
-        "category": "Xtatix Action"
+        "category": "Alchira Action"
       },
       {
-        "command": "xtatix.action.command",
+        "command": "alchira.action.command",
         "title": "Core Commands on Terminal.",
-        "category": "Xtatix Action"
+        "category": "Alchira Action"
       },
       {
-        "command": "xtatix.server.pause",
+        "command": "alchira.server.pause",
         "title": "Pause Activity",
-        "category": "Xtatix Server"
+        "category": "Alchira Server"
       },
       {
-        "command": "xtatix.server.restart",
+        "command": "alchira.server.restart",
         "title": "Restart",
-        "category": "Xtatix Server"
+        "category": "Alchira Server"
       },
       {
-        "command": "xtatix.server.send",
+        "command": "alchira.server.send",
         "title": "Interactive",
-        "category": "Xtatix Server"
+        "category": "Alchira Server"
       }
     ],
     "keybindings": [
       {
         "key": "alt+x",
-        "command": "xtatix.editor.sketch",
+        "command": "alchira.editor.sketch",
         "when": "editorFocus"
       },
       {
         "key": "alt+shift+x",
-        "command": "xtatix.editor.format",
+        "command": "alchira.editor.format",
         "when": "editorFocus"
       },
       {
         "key": "alt+ctrl+x",
-        "command": "xtatix.action.compview",
+        "command": "alchira.action.compview",
         "when": "editorFocus"
       },
       {
         "key": "ctrl+alt+shift+x",
-        "command": "xtatix.action.toggle",
+        "command": "alchira.action.toggle",
         "when": "editorFocus"
       }
     ],

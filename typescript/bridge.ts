@@ -80,7 +80,7 @@ export class BRIDGE {
             const binPathFile = path.join(this.Server.WorkspaceUri.fsPath, 'node_modules', Metadata.Package, 'abspath.txt');
             if (existsSync(binPathFile)) { binpathlist.push(fs.readFileSync(binPathFile, { encoding: 'utf-8' })); }
 
-            binpathlist.push(ReadCmdReturn('xtatix', 'binpath'));
+            binpathlist.push(ReadCmdReturn('alchira', 'binpath'));
         }
 
         binpathlist.push(Metadata.binPath);

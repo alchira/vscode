@@ -70,7 +70,7 @@ jobs:
         id: ovsx
         uses: HaaLeo/publish-vscode-extension@v2
         with:
-          pat: ${{ secrets.Xtatix_OVSX }}
+          pat: ${{ secrets.Alchira_OVSX }}
           extensionFile: ${{ env.packaged_vsix }}
         continue-on-error: true
 

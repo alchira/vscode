@@ -24,7 +24,7 @@ import { FOLDRANGE } from './internal/fold-range';
 import { SKETCHLOAD } from './internal/sketchload';
 import { FILELOCAL } from './file-local';
 
-const ID = "xtatix";
+const ID = "alchira";
 const PORT = 1248;
 
 export class ExtensionManager {

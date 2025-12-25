@@ -23,7 +23,7 @@ export class WIDGET {
             { type: "command", label: 'Preview', content: 'preview' },
             { type: "command", label: 'Init/Verify', content: 'init' },
             { type: "redirect", label: 'Git Reposiory.', content: "https://github.com/alchira/package" },
-            { type: "redirect", label: 'Spin My Flavour.', content: "https://github.com/alchira/xcaffold." },
+            { type: "redirect", label: 'Spin My Flavour.', content: "https://github.com/alchira/scaffold." },
             { type: "redirect", label: 'Get a walkthorugh..', content: "https://github.com/alchira/tutorial" },
             { type: "redirect", label: 'Sponsor Our Project Today.', content: "https://github.com/sponsors/yshelldev/dashboard" },
         ];
@@ -76,7 +76,7 @@ export class WIDGET {
         };
 
         const errlen = this.Server.W_DIAGNOSTICS.serverRefresh.length;
-        this.statusBar.text = `$(${this.statusIcon}) ${this.Server.IDCAP} $(warning) ${errlen}`;
+        this.statusBar.text = `$(${this.statusIcon}) ${this.Server.CALL} $(warning) ${errlen}`;
         this.statusBar.backgroundColor = errlen ? new vscode.ThemeColor('statusBarItem.errorBackground') : undefined;
         this.statusBar.tooltip = this.Server.W_SKETCHPAD.url;
         this.statusBar.show();

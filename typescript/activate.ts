@@ -25,10 +25,12 @@ import { SKETCHLOAD } from './internal/sketchload';
 import { FILELOCAL } from './file-local';
 
 const ID = "alchira";
+const CALL = "Al";
 const PORT = 1248;
 
 export class ExtensionManager {
     readonly ID = ID;
+    readonly CALL = CALL;
     readonly PORT = PORT;
     readonly IDCAP = this.ID.toLocaleUpperCase();
     readonly SymlinkRgx = /[\w/$_-]+/i;

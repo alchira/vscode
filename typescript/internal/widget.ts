@@ -78,7 +78,7 @@ export class WIDGET {
         const errlen = this.Server.W_DIAGNOSTICS.serverRefresh.length;
         this.statusBar.text = `$(${this.statusIcon}) ${this.Server.IDCAP} $(warning) ${errlen}`;
         this.statusBar.backgroundColor = errlen ? new vscode.ThemeColor('statusBarItem.errorBackground') : undefined;
-        this.statusBar.tooltip = this.Server.W_SANDBOX.url;
+        this.statusBar.tooltip = this.Server.W_SKETCHPAD.url;
         this.statusBar.show();
     };
 

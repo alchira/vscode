@@ -29,8 +29,8 @@ export class BRIDGE {
                     break;
                 }
 
-                case "sandbox-url": {
-                    this.Server.W_SANDBOX.url = res.result;
+                case "sketchpad-url": {
+                    this.Server.W_SKETCHPAD.url = res.result;
                     break;
                 }
 
@@ -40,7 +40,7 @@ export class BRIDGE {
                 }
 
                 case "server-state-list": {
-                    this.Server.W_SANDBOX.States = res.result as typeof this.Server.W_SANDBOX.States;
+                    this.Server.W_SKETCHPAD.States = res.result as typeof this.Server.W_SKETCHPAD.States;
                     break;
                 }
 
@@ -100,7 +100,7 @@ export class BRIDGE {
 
     periodics = async () => {
         const preriodics = [
-            "sandbox-url",
+            "sketchpad-url",
             "session-port",
             "websocket-url",
             "server-state-list"
@@ -128,7 +128,7 @@ export class BRIDGE {
         this.dopause();
         this.WS?.close();
         this.WS = null;
-        this.Server.W_SANDBOX.dispose();
+        this.Server.W_SKETCHPAD.dispose();
         this.Process = spawn(binpath, args, {
             cwd: spawnPath,
             stdio: ['pipe', 'pipe', 'pipe'],

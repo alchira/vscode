@@ -24,9 +24,9 @@ For details, please read the full EULA document provided in this repository.
 
 - Format only Xtatix-specific blocks. Use repeatedly to toggle folding for the nearest foldable range.
 
-### Component Sandbox: `[ ctrl + alt + x ]`
+### Component Sketchpad: `[ ctrl + alt + x ]`
 
-- Open the component sandbox webview for the symlink at the cursor, next to the editor.
+- Open the component sketchpad webview for the symlink at the cursor, next to the editor.
 
 ### Source/Target Switch: `[ ctrl + alt + shift + x ]`
 

@@ -1,7 +1,7 @@
 import vscode from 'vscode';
 import { ExtensionManager } from '../activate';
 
-export class SANDBOX {
+export class SKETCHPAD {
     public url = "";
     private Server: ExtensionManager;
     public States: Record<string, string | boolean> = {};
@@ -39,7 +39,7 @@ export class SANDBOX {
             }, 2000);
         }
         if (vscode.window.activeTextEditor || this.RefereshFlagActive) {
-            this.Server.W_BRIDGE.WSStream("sandbox-view");
+            this.Server.W_BRIDGE.WSStream("sketchpad-view");
         }
     }
 
@@ -52,7 +52,7 @@ export class SANDBOX {
         } else if (this.Server.W_BRIDGE.SessionPort > 0) {
             this.previewPanal = vscode.window.createWebviewPanel(
                 this.url,
-                this.Server.IDCAP + ' Component Sandbox',
+                this.Server.IDCAP + ' Component Sketchpad',
                 {
                     viewColumn: vscode.ViewColumn.Beside,
                     preserveFocus: false

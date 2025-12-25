@@ -2,7 +2,7 @@
 import vscode from 'vscode';
 import { ExtensionManager } from '../activate';
 
-export class SKETCH {
+export class SKETCHLOAD {
     private Server: ExtensionManager;
 
     constructor(core: ExtensionManager) {

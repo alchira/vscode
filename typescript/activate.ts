@@ -18,10 +18,10 @@ import { FORMATTING } from './internal/formatting';
 import { INTELLISENSE } from './internal/intellisense';
 import { DIAGNOSTICS } from './internal/diagnostics';
 import { DECORATIONS } from './decorate';
-import { SANDBOX } from './internal/sandbox';
+import { SKETCHPAD } from './internal/sketchpad';
 import { FILETOGGLE } from './internal/file-toggle';
 import { FOLDRANGE } from './internal/fold-range';
-import { SKETCH } from './internal/sketch';
+import { SKETCHLOAD } from './internal/sketchload';
 import { FILELOCAL } from './file-local';
 
 const ID = "xtatix";
@@ -35,10 +35,10 @@ export class ExtensionManager {
     get config(): vscode.WorkspaceConfiguration { return vscode.workspace.getConfiguration(this.ID); };
 
     // External Workers
-    public W_SKETCH: SKETCH;
+    public W_SKETCH: SKETCHLOAD;
     public W_BRIDGE: BRIDGE;
     public W_WIDGET: WIDGET;
-    public W_SANDBOX: SANDBOX;
+    public W_SKETCHPAD: SKETCHPAD;
     public W_PALETTE: PALETTE;
     public W_FOLDRANGE: FOLDRANGE;
     public W_FORMATTING: FORMATTING;
@@ -105,11 +105,11 @@ export class ExtensionManager {
         this.reset();
         this.Context = context;
 
-        this.W_SKETCH = new SKETCH(this);
+        this.W_SKETCH = new SKETCHLOAD(this);
         this.W_BRIDGE = new BRIDGE(this);
         this.W_WIDGET = new WIDGET(this);
         this.W_PALETTE = new PALETTE(this);
-        this.W_SANDBOX = new SANDBOX(this);
+        this.W_SKETCHPAD = new SKETCHPAD(this);
         this.W_FOLDRANGE = new FOLDRANGE(this);
         this.W_DEFINITION = new DEFINITION(this);
         this.W_FORMATTING = new FORMATTING(this);
@@ -128,7 +128,7 @@ export class ExtensionManager {
             this.W_BRIDGE,
             this.W_WIDGET,
             this.W_PALETTE,
-            this.W_SANDBOX,
+            this.W_SKETCHPAD,
             this.W_FOLDRANGE,
             this.W_DEFINITION,
             this.W_FORMATTING,
@@ -145,7 +145,7 @@ export class ExtensionManager {
 
             vscode.commands.registerCommand(`${this.ID}.action.toggle`, this.W_FILETOGGLE.CommandFileToggle),
             vscode.commands.registerCommand(`${this.ID}.editor.format`, this.W_FORMATTING.formatFile),
-            vscode.commands.registerCommand(`${this.ID}.action.compview`, this.W_SANDBOX.Open),
+            vscode.commands.registerCommand(`${this.ID}.action.compview`, this.W_SKETCHPAD.Open),
             vscode.commands.registerCommand(`${this.ID}.editor.sketch`, this.W_SKETCH.SketchStructure),
 
             vscode.commands.registerCommand(`${this.ID}.server.pause`, this.pause),
@@ -190,13 +190,13 @@ export class ExtensionManager {
         this.W_DIAGNOSTICS.clientRefresh();
         this.W_DIAGNOSTICS.serverRefresh();
         this.W_WIDGET.refresh();
-        const cursor = this.W_SANDBOX.RefreshCursor();
+        const cursor = this.W_SKETCHPAD.RefreshCursor();
         return { ...cursor, filemap };
     };
 
     UpdateMixedManifest = (m: t_Manifest_Mixed) => {
         if (m.global) { this.Global = m.global; }
-        this.W_SANDBOX.RefreshWebview();
+        this.W_SKETCHPAD.RefreshWebview();
         this.UpdateLocalsManifest(m.locals);
     };
 

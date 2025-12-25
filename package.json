@@ -99,7 +99,7 @@
         "xtatix.server.staticport": {
           "type": "boolean",
           "default": true,
-          "description": "Use a fixed static port for sandbox WebSocket; disable if static cache issues occur (requires restart)."
+          "description": "Use a fixed static port for sketchpad WebSocket; disable if static cache issues occur (requires restart)."
         },
         "xtatix.decoration.comment": {
           "type": "string",
@@ -203,6 +203,5 @@
         "./xml.json"
       ]
     }
-    
   }
 }

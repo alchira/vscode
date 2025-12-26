@@ -37,7 +37,7 @@ For details, please read the full EULA document provided in this repository.
 ### Statusbar Widget
 
 - Displays file status and error count.
-- Quick access to integrated Alchira-Central commands.
+- Quick access to integrated Alchira commands.
 
 ### Developer Assistance
 

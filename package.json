@@ -125,7 +125,8 @@
           "Alchira"
         ],
         "extensions": [
-          ".al"
+          ".al",
+          ".alchira"
         ]
       }
     ],

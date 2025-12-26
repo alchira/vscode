@@ -52,7 +52,7 @@ export class SKETCHPAD {
         } else if (this.Server.W_BRIDGE.SessionPort > 0) {
             this.previewPanal = vscode.window.createWebviewPanel(
                 this.url,
-                this.Server.IDCAP + ' Component Sketchpad',
+                this.Server.IDCAP + 'Sketchpad',
                 {
                     viewColumn: vscode.ViewColumn.Beside,
                     preserveFocus: false

@@ -24,15 +24,16 @@ import { FOLDRANGE } from './internal/fold-range';
 import { SKETCHLOAD } from './internal/sketchload';
 import { FILELOCAL } from './file-local';
 
-const ID = "alchira";
-const CALL = "Al";
 const PORT = 1248;
+const ID = "alchira";
+const CALL = "al";
 
 export class ExtensionManager {
-    readonly ID = ID;
-    readonly CALL = CALL;
     readonly PORT = PORT;
+    readonly ID = ID;
     readonly IDCAP = this.ID.toLocaleUpperCase();
+    readonly CALL = CALL;
+    readonly CALLCAP = this.CALL.toLocaleUpperCase();
     readonly SymlinkRgx = /[\w/$_-]+/i;
     get config(): vscode.WorkspaceConfiguration { return vscode.workspace.getConfiguration(this.ID); };
 

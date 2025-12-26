@@ -13,7 +13,7 @@ export default tseslint.config(
 		ignores: [
 			'.vscode-test',
 			'package/**/*',
-			'esbuild.js',
+			'esbuild.config.mjs',
 			'extension',
 		]
 	},

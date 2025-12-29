@@ -12,7 +12,7 @@ For details, please read the full EULA document provided in this repository.
 
 ## Preview 
 
-![Preview Output](./assets/preview.png)
+![Preview Output](./assets/preview.gif)
 
 ## Shortcuts
 

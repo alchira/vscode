@@ -19,4 +19,8 @@ typescript/**
 **/eslint.config.mjs
 **/tsconfig.build.json
 
+assets/**
+package/assets/**
+!assets/logo.png
 package/binary
+vscode/esbuild.config.mjs

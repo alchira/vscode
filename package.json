@@ -13,7 +13,6 @@
     "type": "git",
     "url": "https://github.com/alchira/vscode"
   },
-  
   "bugs": {
     "url": "https://github.com/alchira/vscode/issues"
   },
@@ -33,10 +32,10 @@
     "@types/ws": "^8.18.1",
     "eslint": "^9.13.0",
     "typescript": "^5.8.3",
+    "esbuild": "^0.27.2",
     "typescript-eslint": "^8.26.0"
   },
   "dependencies": {
-    "esbuild": "^0.27.2",
     "vscode-css-languageservice": "^6.3.5",
     "ws": "^8.18.3"
   },

@@ -123,7 +123,7 @@ export class INTELLISENSE {
                         `[${lib}$]`,
                         lib,
                         vscode.CompletionItemKind.Struct,
-                        `External Cluster`,
+                        `External Group`,
                     ));
                 }
             }
@@ -162,7 +162,7 @@ export class INTELLISENSE {
                         `[${lib}$]`,
                         lib,
                         vscode.CompletionItemKind.Struct,
-                        `Native Cluster`,
+                        `Native Group`,
                     ));
                 }
             }
@@ -180,7 +180,7 @@ export class INTELLISENSE {
                     key,
                     key,
                     iconKind,
-                    `External Cluster`,
+                    `External Group`,
                 ));
             }
         }

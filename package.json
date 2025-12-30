@@ -19,10 +19,10 @@
   "contributing": "https://github.com/alchira/vscode/blob/main/CONTRIBUTING.md",
   "scripts": {
     "lint": "eslint ./typescript --ext .ts",
-    "init": "npm install -g typescript @vscode/vsce ovsx && npm install",
+    "init": "npm i -g typescript @vscode/vsce ovsx && npm i",
     "esbuild": "node esbuild.config.mjs",
     "tsbuild": "npx tsc -p ./typescript",
-    "package": "npm run init && npm run tsbuild && npm install --omit=dev && vsce package && npm run init"
+    "package": "npm run init && npm run tsbuild && npm i --omit=dev && vsce package && npm i"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

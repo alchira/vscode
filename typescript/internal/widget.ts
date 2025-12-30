@@ -23,7 +23,7 @@ export class WIDGET {
             { type: "command", label: 'Preview', content: 'preview' },
             { type: "command", label: 'Init/Verify', content: 'init' },
             { type: "redirect", label: 'Git Reposiory.', content: "https://github.com/alchira/package" },
-            { type: "redirect", label: 'Spin My Flavour.', content: "https://github.com/alchira/scaffold." },
+            { type: "redirect", label: 'Spin My Flavour.', content: "https://github.com/alchira/scaffold" },
             { type: "redirect", label: 'Get a walkthorugh..', content: "https://github.com/alchira/tutorial" },
             { type: "redirect", label: 'Sponsor Our Project Today.', content: "https://github.com/sponsors/yshelldev/dashboard" },
         ];

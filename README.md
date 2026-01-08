@@ -12,7 +12,7 @@ For details, please read the full EULA document provided in this repository.
 
 ## Preview 
 
-![Preview Output](https://github.com/alchira/package/blob/main/assets/preview.gif?raw=true)
+![Preview Output](https://raw.githubusercontent.com/alchira/.github/refs/heads/main/assets/preview.gif)
 
 ## Shortcuts
 

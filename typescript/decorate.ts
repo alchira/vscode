@@ -172,7 +172,7 @@ export class DECORATIONS {
                     const val = track.val;
                     if (val.length > 2 && val[0] == "\\") {
                         const v1 = val[1];
-                        if (v1 == "~" || v1 == '+' || v1 == "=") {
+                        if (v1 == "~" || v1 == "=") {
                             const tr_val = val.slice(2);
                             if (localsymlinks[tr_val]) {
                                 symlink_Decos.push({ range: track.valRange, hoverMessage: local.getMarkdown(tr_val) });
@@ -280,7 +280,7 @@ export class DECORATIONS {
                     }
                 }
 
-                // Snippets with in watching attributes
+                // Snippets with in default attributes
                 for (const track of tagRange.cache.defaultValFrags) {
                     try {
                         const val = track.val;

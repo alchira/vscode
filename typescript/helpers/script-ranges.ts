@@ -16,6 +16,7 @@ const closeBraces = ["]", "}", ")"];
 const openBraces = ["[", "{", "(", "'", '"', "`"];
 const symclasDeclarationRegex = /^[\w-_]+\$+[\w-]+$/i;
 const fragRegex = /[\\#\w\d$_/:=~+-]/i;
+const fragRegex_noplus = /[\\#\w\d$_/:=~-]/i;
 
 interface ScannerStash {
     cursorString: string;
@@ -88,6 +89,7 @@ function fargScanner(
     rowMarker: number,
     colMarker: number,
     fragDump: t_TrackRange[],
+    isComment = false
 ): string[] {
     const kind: vscode.FoldingRangeKind = vscode.FoldingRangeKind.Comment;
     const fragments: string[] = [];
@@ -131,7 +133,7 @@ function fargScanner(
             snippet = "";
         }
 
-        if (snippet.length === 0 || (content[marker + 1] === "\\" && content[marker + 2] === "#") || content[marker + 1] === "~") {
+        if (snippet.length === 0 || (content[marker + 1] === "\\" && content[marker + 2] === "#") || (isComment && content[marker + 1] === "~")) {
             snippet = "";
             start = marker;
             startPos = new vscode.Position(rowMarker, colMarker);
@@ -229,7 +231,7 @@ function tagScanner(
                 const blockRange = new vscode.Range(attrStartPos, valEndPos);
 
                 if (attr === "&") {
-                    const fragments = fargScanner(content, valStart, fileCursor.active.marker, valStartPos.line, valStartPos.character, tagCache.commentValFrags);
+                    const fragments = fargScanner(content, valStart, fileCursor.active.marker, valStartPos.line, valStartPos.character, tagCache.commentValFrags, true);
                     tagCache.commentsRanges.push({ kind, attrRange, valRange, blockRange, valStart, valEnd, attrStart, attrEnd, attr, val, multiLine, fragments });
                 } else if (attr.endsWith("&") || symclasDeclarationRegex.test(attr)) {
                     hashruleScanner(content, attrStart, attrEnd + 1, attrStartPos.line, attrStartPos.character, tagCache);
@@ -326,7 +328,7 @@ export default function ScanScriptRanges(content: string, watching: string[] = [
             let inc = true;
 
 
-            if (ch && fragRegex.test(ch)) {
+            if (ch && fragRegex_noplus.test(ch)) {
                 snippet += ch;
                 endPos = new vscode.Position(fileCursor.active.rowMarker, fileCursor.active.colMarker);
             } else if (snippet.length > 0) {
@@ -375,6 +377,7 @@ export default function ScanScriptRanges(content: string, watching: string[] = [
                 } else {
                     inc = false;
                 }
+                startPos = new vscode.Position(fileCursor.active.rowMarker, fileCursor.active.colMarker);
             }
 
             if (inc) { fileCursor.increment(); }
